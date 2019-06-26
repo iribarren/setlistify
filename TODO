@@ -1,0 +1,23 @@
+
+COVER:
+    Diferenciar la pagina de homepage que va a tener diseño propio del resto que pueden compartir css y demas
+    Hacer que el twig del homepage no herede del base
+    Añadir un punto de acceso de webpack para el homepage para que tenga solo lo suyo, ya que el body difiere
+
+setlist.fm
+    Insertarlo en la interfaz de usuario
+    
+
+spotify
+    Redirigir mejor despues de obtener acceso, como en el curso, dependiendo de la sesion
+    Hacer una seleccion despues de buscar la cancion para elegir el artista adecuado
+
+setlist-client
+    controlar las respuestas 404 (seguramente lo mejor sea aqui)
+    manejar bien las respuestas 404 desde la app
+
+Entities
+    ir adaptandolas segun lo que necesiten setlistfm y spotify (ids de un sitio y otro, urls etc etc)
+
+App final:
+    intentar controlar que desde una ip solo se creen X setlists sin haberse registrado ( guardar ip en cache servidor o BBDD) mediante voter
