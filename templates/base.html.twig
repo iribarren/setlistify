@@ -13,32 +13,11 @@
         {% endblock %}
         
     </head>
-    <body class="text-center">
-           
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-            <header class="masthead mb-auto">
-              <div class="inner">
-                <h3 class="masthead-brand">Setlistify</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                  <a class="nav-link active" href="{{ path('app_register') }}">Register</a>
-                  <a class="nav-link" href="{{ path('app_login') }}">Sign in</a>
-                  <a class="nav-link" href="#">Contact</a>
-                </nav>
-              </div>
-            </header>
+    <body>
+            
+        {% block body %}{% endblock %}
         
-            <main role="main" class="inner cover">
-                {% block body %}{% endblock %}
-            </main>
-        
-            <footer class="mastfoot mt-auto">
-            <div class="inner">
-              <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-              <p>Photo by <a href="https://snapwiresnaps.tumblr.com/">Snapwire</a>.</p>
-            </div>
-          </footer>
-        </div>
-        
+            
         {% block lib_javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

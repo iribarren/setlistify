@@ -1,9 +1,4 @@
-{% extends 'base_cover.html.twig' %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('cover') }}
-{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Setlistify{% endblock %}
 
@@ -17,9 +12,4 @@
       <a href="#" class="btn btn-lg btn-secondary">Sign in</a>
     </p>
 
-{% endblock %}
-
- {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('cover') }}
 {% endblock %}
