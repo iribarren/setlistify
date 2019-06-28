@@ -9,6 +9,7 @@
 require('../css/app.css');
 
 const $ = require('jquery');
+
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 require('popper.js');
@@ -18,3 +19,10 @@ require("bootstrap/dist/css/bootstrap.css");
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+(function () {
+    'use strict'
+  
+    feather.replace()
+}())
+  
