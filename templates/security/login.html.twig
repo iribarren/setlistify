@@ -1,5 +1,10 @@
 {% extends 'base_cover.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('cover') }}
+{% endblock %}
+
 {% block body %}
 <form method="post">
     {% if error %}
@@ -39,4 +44,9 @@
     </div>
     
 </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('cover') }}
 {% endblock %}

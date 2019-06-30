@@ -9,10 +9,11 @@
 require('../css/app.css');
 
 const $ = require('jquery');
+global.$ = global.jQuery = $;
 
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
-require('popper.js');
+require('bootstrap');
 require("bootstrap/dist/css/bootstrap.css");
 
 

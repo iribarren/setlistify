@@ -49,6 +49,16 @@ class Setlist
      */
     private $songs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $spotify_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $setlistfm_id;
+
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -143,6 +153,30 @@ class Setlist
             $this->songs->removeElement($song);
             $song->removeSetlist($this);
         }
+
+        return $this;
+    }
+
+    public function getSpotifyId(): ?string
+    {
+        return $this->spotify_id;
+    }
+
+    public function setSpotifyId(string $spotify_id): self
+    {
+        $this->spotify_id = $spotify_id;
+
+        return $this;
+    }
+
+    public function getSetlistfmId(): ?string
+    {
+        return $this->setlistfm_id;
+    }
+
+    public function setSetlistfmId(string $setlistfm_id): self
+    {
+        $this->setlistfm_id = $setlistfm_id;
 
         return $this;
     }

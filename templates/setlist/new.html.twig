@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Setlistify{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">New setlist</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="text-center">Automatic setlist creation</h3>
+                <p class="text-center">Recommended</p>
+                <ul>
+                    <li>Search for an artist</li>
+                    <li>Give a name for your playlist</li>
+                    <li>We will create the playlist with the last live setlist of the band</li>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <h3 class="text-center">Step by step setlist creation</h3>
+                <p class="text-center">Advanced</p>
+                <ul>
+                    <li>Search for an artist</li>
+                    <li>Pick the date of the event</li>
+                    <li>See the songs in the setlist and choose your favorite version</li>
+                    <li>Create the playlist</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <form  method="POST" id="form_lucky" action="{{ path('setlists_add_lucky') }}">
+                    <div class="form-group row">
+                        <label for="artist" class="col-sm-3 col-form-label text-right">Artist: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="artist" name='artist' placeholder="Iron maiden">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label text-right">Playlist name: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="name" name='name' placeholder="My awesome playlist">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6 align-items-center">
+                <form  method="POST" id="form_search" action="{{ path('setlists_search_artist') }}">
+                    <div class="form-group row">
+                        <label for="artist" class="col-sm-3 col-form-label text-right">Artist: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="artist" name='artist' placeholder="Iron maiden">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group row text-center">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-dark" id="create_lucky" type="submit">Create playlist</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row text-center">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-dark" id="create_search" type="submit">See events</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+
+    $('#create_lucky').click( function() {
+        console.log('holi');
+       $('#form_lucky').submit(); 
+    });
+    
+    $('#create_search').click( function() {
+        console.log('holiholi');
+       $('#form_search').submit(); 
+    });
+
+</script>
+{% endblock %}
