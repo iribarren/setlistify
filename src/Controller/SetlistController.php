@@ -11,11 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class SetlistController extends AbstractController
 {
     /**
      * @Route("/setlists", name="setlists")
+     * @IsGranted("ROLE_USER")
      */
     public function index()
     {
@@ -30,6 +32,7 @@ class SetlistController extends AbstractController
     
     /**
      * @Route("/setlists/new", name="setlists_new")
+     * @IsGranted("ROLE_USER")
      */
     public function new()
     {
@@ -40,6 +43,7 @@ class SetlistController extends AbstractController
     
     /**
      * @Route("/setlists/add-lucky", name="setlists_add_lucky")
+     * @IsGranted("ROLE_USER")
      */
     public function createLucky(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager)
     {
@@ -79,6 +83,7 @@ class SetlistController extends AbstractController
     
     /**
      * @Route("/setlists/search_artist", name="setlists_search_artist")
+     * @IsGranted("ROLE_USER")
      */
     public function search(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
     {

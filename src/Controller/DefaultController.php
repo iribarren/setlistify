@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class DefaultController extends AbstractController
 {
@@ -19,6 +20,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/dashboard", name="dashboard")
+     * @IsGranted("ROLE_USER")
      */
     public function dashboard()
     {

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" href="img/favicon.png">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet"> 
         <script src="https://unpkg.com/feather-icons"></script>
         <title>{% block title %}Setlistify{% endblock %}</title>
         
@@ -16,21 +17,22 @@
     </head>
     <body>
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Setlistify</a>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#"><span data-feather="log-out"></span>Sign out</a>
-            </li>
-        </ul>
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0 header_text"  href="{{path('dashboard')}}">Setlistify</a>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="{{path('app_logout')}}"><span data-feather="log-out"></span>Sign out</a>
+                </li>
+            </ul>
         </nav>
 
         <div class="container-fluid">
+        
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'dashboard') %} active {% endif %}"" href="{{path('dashboard')}}">
                     <span data-feather="home"></span>
                     Dashboard
                     </a>
@@ -45,7 +47,7 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
                     <span data-feather="music"></span>
                     My playlists
                     </a>
