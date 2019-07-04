@@ -31,6 +31,21 @@ class SetlistController extends AbstractController
     }
     
     /**
+     * @Route("/setlists/{id}", name="setlists_see")
+     * @IsGranted("ROLE_USER")
+     */
+    public function see(Setlist $setlist)
+    {
+        $repository = $this->getDoctrine()->getRepository(Setlist::class);
+        $setlists = $repository->findAll();
+        
+        return $this->render('setlist/see.html.twig', [
+            'controller_name' => 'SetlistController',
+            'setlist' => $setlist,
+        ]);
+    }
+    
+    /**
      * @Route("/setlists/new", name="setlists_new")
      * @IsGranted("ROLE_USER")
      */
