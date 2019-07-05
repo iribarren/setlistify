@@ -16,55 +16,58 @@
         
     </head>
     <body>
-        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0 header_text"  href="{{path('dashboard')}}">Setlistify</a>
-            <h2 class="text-center text-white" type="text">
-                {% block header %} {% endblock %}
-            </h2>
-            <ul class="navbar-nav px-3">
-                <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="{{path('app_logout')}}"><span data-feather="log-out"></span>Sign out</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="container-fluid">
-        
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'dashboard') %} active {% endif %}"" href="{{path('dashboard')}}">
-                    <span data-feather="home"></span>
-                    Dashboard
-                    </a>
-                </li>
+        <div id="app">
+            <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+                <a class="navbar-brand col-sm-3 col-md-2 mr-0 header_text"  href="{{path('dashboard')}}">Setlistify</a>
+                <h2 class="text-center text-white" type="text">
+                    {% block header %} {% endblock %}
+                </h2>
+                <ul class="navbar-nav px-3">
+                    <li class="nav-item text-nowrap">
+                        <a class="nav-link" href="{{path('app_logout')}}"><span data-feather="log-out"></span>Sign out</a>
+                    </li>
                 </ul>
-
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Playlists</span>
-                <a class="d-flex align-items-center text-muted" href="{{ path('setlists_new') }}">
-                    <span data-feather="plus-circle"></span>
-                </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                <li class="nav-item">
-                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
-                    <span data-feather="music"></span>
-                    My playlists
-                    </a>
-                </li>
-                </ul>
-            </div>
             </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                {% block body %}{% endblock %}
-            </main>
-        </div>
-        </div>                
+            <div class="container-fluid">
             
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'dashboard') %} active {% endif %}" href="{{path('dashboard')}}">
+                        <span data-feather="home"></span>
+                        Dashboard
+                        </a>
+                    </li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Playlists</span>
+                    <a class="d-flex align-items-center text-muted" href="{{ path('setlists_new') }}">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
+                        <span data-feather="music"></span>
+                        My playlists
+                        </a>
+                    </li>
+                    </ul>
+                </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+            </div>                
+                
+            
+        </div>
         {% block lib_javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

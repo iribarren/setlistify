@@ -4,6 +4,7 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
+import Vue from 'vue';
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
@@ -25,5 +26,11 @@ $(document).ready(function() {
     'use strict'
   
     feather.replace()
-}())
-  
+}())  
+
+/**
+* Create a fresh Vue Application instance
+*/
+new Vue({
+  el: '#app',
+});

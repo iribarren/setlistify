@@ -31,7 +31,7 @@ class SetlistController extends AbstractController
     }
     
     /**
-     * @Route("/setlists/{id}", name="setlists_see")
+     * @Route("/setlists/sett/{id}", name="setlists_see")
      * @IsGranted("ROLE_USER")
      */
     public function see(Setlist $setlist)
