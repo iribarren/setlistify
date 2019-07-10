@@ -18,7 +18,7 @@ class SetlistClientFacade extends Client
     {
         $result = $this->artist->search("","",$artistName);
         
-        $artist = $result['total'] == 1 ? $result['artist'][0] : $result['artist'][0];
+        $artist = $result['total'] == 1 ? $result['artist'][0] : $result['artist'][0]; //??
         
         $setlists = $this->setlist->search($artist['mbid']);
 

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Setlistify{% endblock %}
+
+{% block header %}Latest events for {{artist.name}}{% endblock %}
+
+{% block body %}
+
+    <hr />
+
+    <div class="container">
+        <div class="row">
+            <div class="col ">
+                <table class="table justify-content-center">
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Event</td>
+                            <td># Songs</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for setlist in setlists.setlist %}
+                            <tr>
+                                <td>{{ setlist.eventDate | date("Y/m/d") }}</td>
+                                <td>{{ setlist.artist.name }} at {{ setlist.venue.name }}</td>
+                                <td>{{ setlist.songCount }}</td>
+                                <td><a href="#{#{path('setlist_preview',{'setlistId': setlist.id,'artist': setlist.artist.name})}#}" class="alert-link"><i data-feather="eye"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center pg-darkgrey">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+{% endblock %}

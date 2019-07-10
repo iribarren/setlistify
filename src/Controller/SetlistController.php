@@ -105,14 +105,15 @@ class SetlistController extends AbstractController
         if ($session->has('spotify_token'))
         {
             $spotifyClient->setAccessToken($session->get('spotify_token'));
-            $artist = $request->request->get('artist');
-            $artistInfo = $spotifyClient->getArtistInfo($artist);
-
-            $setlists = $setlistClient->searchSetlistsForArtist($artist);
-        
-            return $this->render('setlist/search_results.html.twig', [
+            $artistSearch = $request->request->get('artist');
+            $allArtists = $spotifyClient->getArtistInfo($artistSearch);
+            $artistInfo = $allArtists->artists->items[0];
+            $setlists = $setlistClient->searchSetlistsForArtist($artistSearch);
+           
+            return $this->render('setlist/event_list.html.twig', [
                 'controller_name' => 'SetlistController',
                 'artist' => $artistInfo,
+                'allArtists' => $allArtists,
                 'setlists' => $setlists,
             ]);
         } else {
