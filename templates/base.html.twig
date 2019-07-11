@@ -7,13 +7,13 @@
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet"> 
         <script src="https://unpkg.com/feather-icons"></script>
         <title>{% block title %}Setlistify{% endblock %}</title>
-        
+
         {% block stylesheets %}
             {# 'app' must match the first argument to addEntry() in webpack.config.js #}
             {{ encore_entry_link_tags('app') }}
-            
+
         {% endblock %}
-        
+
     </head>
     <body>
         <div id="app">
@@ -30,43 +30,40 @@
             </nav>
 
             <div class="container-fluid">
-            
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'dashboard') %} active {% endif %}" href="{{path('dashboard')}}">
-                        <span data-feather="home"></span>
-                        Dashboard
-                        </a>
-                    </li>
-                    </ul>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Playlists</span>
-                    <a class="d-flex align-items-center text-muted" href="{{ path('setlists_new') }}">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
-                        <span data-feather="music"></span>
-                        My playlists
-                        </a>
-                    </li>
-                    </ul>
+                <div class="row">
+                    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                        <div class="sidebar-sticky">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'dashboard') %} active {% endif %}" href="{{path('dashboard')}}">
+                                        <span data-feather="home"></span>
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                <span>Playlists</span>
+                                <a class="d-flex align-items-center text-muted" href="{{ path('setlists_new') }}">
+                                    <span data-feather="plus-circle"></span>
+                                </a>
+                            </h6>
+                            <ul class="nav flex-column mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
+                                        <span data-feather="music"></span>
+                                        My playlists
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                        {% block body %}{% endblock %}
+                    </main>
                 </div>
-                </nav>
-
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                    {% block body %}{% endblock %}
-                </main>
-            </div>
             </div>                
-                
-            
         </div>
         {% block lib_javascripts %}
             {{ encore_entry_script_tags('app') }}

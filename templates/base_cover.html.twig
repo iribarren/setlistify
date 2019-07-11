@@ -6,39 +6,37 @@
         <link rel="icon" type="image/png" href="img/favicon.png">
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet"> 
         <title>{% block title %}Setlistify{% endblock %}</title>
-        
+
         {% block stylesheets %}
             {# 'app' must match the first argument to addEntry() in webpack.config.js #}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        
+
     </head>
     <body class="text-center">
-        <div id="app">
-            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-                <header class="masthead mb-auto">
-                  <div class="inner">
+        <div id="app" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
                     <h1 class="masthead-brand header_text">Setlistify</h1>
                     <nav class="nav nav-masthead justify-content-center">
-                      <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_register') %} active {% endif %}" href="{{ path('app_register') }}">Register</a>
-                      <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_login') %} active {% endif %}" href="{{ path('app_login') }}">Sign in</a>
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_register') %} active {% endif %}" href="{{ path('app_register') }}">Register</a>
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_login') %} active {% endif %}" href="{{ path('app_login') }}">Sign in</a>
                     </nav>
-                  </div>
-                </header>
-
-                <main role="main" class="inner cover">
-                    {% block body %}{% endblock %}
-                </main>
-
-                <footer class="mastfoot mt-auto">
-                <div class="inner">
-                  <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-                  <p>Photo by <a href="https://snapwiresnaps.tumblr.com/">Snapwire</a>.</p>
                 </div>
-              </footer>
-            </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    <p>Photo by <a href="https://snapwiresnaps.tumblr.com/">Snapwire</a>.</p>
+                </div>
+            </footer>
         </div>
-        
+
         {% block lib_javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

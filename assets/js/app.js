@@ -5,7 +5,7 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 import Vue from 'vue';
-import Example from './components/Example'
+import Pager from './components/Pager.vue'
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
@@ -34,5 +34,5 @@ $(document).ready(function() {
 */
 new Vue({
   el: '#app',
-  components: {Example}
+  components: { Pager },
 });
