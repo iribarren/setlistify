@@ -31,7 +31,7 @@ class SetlistController extends AbstractController
     }
     
     /**
-     * @Route("/setlists/sett/{id}", name="setlists_see")
+     * @Route("/setlists/see/{id}", name="setlists_see",  requirements={"page"="\d+"})
      * @IsGranted("ROLE_USER")
      */
     public function see(Setlist $setlist)
@@ -80,8 +80,7 @@ class SetlistController extends AbstractController
             $setlist->setSetlistfmId($setlistfm['id']);
             $setlist->setSpotifyId($playlist->id);
             
-            $repository = $this->getDoctrine()->getRepository(User::class);
-            $user = $repository->find(2);
+            $user = $this->getUser();
             
             $setlist->setUser($user);
             $setlist->setVenue($setlistfm['venue']['name']);
@@ -116,6 +115,73 @@ class SetlistController extends AbstractController
                 'allArtists' => $allArtists,
                 'setlists' => $setlists,
             ]);
+        } else {
+            return $this->redirectToRoute('spotify_get_access');
+        }
+    }
+
+    /**
+     * @Route("/setlists/preview", name="setlist_preview")
+     * @IsGranted("ROLE_USER")
+     */
+    public function preview(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
+    {
+        if ($session->has('spotify_token'))
+        {
+            $spotifyClient->setAccessToken($session->get('spotify_token'));
+            $setlistId = $request->query->get('setlistId');            
+            $artist = $request->query->get('artist');            
+            $setlist = $setlistClient->setlist->getById($setlistId);
+            $setlistSongs = $setlistClient->getSetlistSongs($setlist);
+            $songsSpotifyInfo = $spotifyClient->searchSongsFullInfo($setlistSongs, $setlist['artist']['name']);
+                    
+            return $this->render('setlist/preview.html.twig', [
+                'controller_name' => 'SetlistController',
+                'setlist' => $setlist,
+                'setlistSongs' => $setlistSongs,
+                'songsSpotifyInfo' => $songsSpotifyInfo,
+                
+            ]);
+        } else {
+            return $this->redirectToRoute('spotify_get_access');
+        }
+    }
+
+    /**
+     * @Route("/setlists/create", name="setlists_create")
+     * @IsGranted("ROLE_USER")
+     */
+    public function createPlaylist(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager)
+    {
+        if ($session->has('spotify_token'))
+        {
+            $spotifyClient->setAccessToken($session->get('spotify_token'));
+
+            
+            $songs = $request->request->get('songs');
+            $setlistId = $request->request->get('setlistId');
+            $playlistName = $request->request->get('playlistName');   
+            
+            $playlist = $spotifyClient->addPlaylist($playlistName, $songs);
+            
+            $setlistfm = $setlistClient->setlist->getById($setlistId);
+            $setlist = new Setlist();
+            $setlist->setName($playlistName);
+            $setlist->setCity($setlistfm['venue']['city']['name']);
+            $setlist->setDate(new \DateTime($setlistfm['eventDate']));
+            $setlist->setSetlistfmId($setlistfm['id']);
+            $setlist->setSpotifyId($playlist->id);
+            
+            $user = $this->getUser();
+            
+            $setlist->setUser($user);
+            $setlist->setVenue($setlistfm['venue']['name']);
+            
+            $entityManager->persist($setlist);
+            $entityManager->flush();
+                        
+            return $this->redirectToRoute('setlists');
+            
         } else {
             return $this->redirectToRoute('spotify_get_access');
         }

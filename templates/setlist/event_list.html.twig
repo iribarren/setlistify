@@ -26,7 +26,7 @@
                                 <td>{{ setlist.eventDate | date("Y/m/d") }}</td>
                                 <td>{{ setlist.artist.name }} at {{ setlist.venue.name }}</td>
                                 <td>{{ setlist.songCount }}</td>
-                                <td><a href="#{#{path('setlist_preview',{'setlistId': setlist.id,'artist': setlist.artist.name})}#}" class="alert-link"><i data-feather="eye"></i></a></td>
+                                <td><a href="{{path('setlist_preview',{'setlistId': setlist.id,'artist': setlist.artist.name})}}" ><i data-feather="eye"></i></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
