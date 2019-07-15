@@ -9,15 +9,28 @@
     <hr />
 
     <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-sm-3">
+                <img src="{{ artist.images[2].url }}" />
+            </div>
+            <div class="col-sm-9">
+                <div>
+                    <h3 class="text-center"> {{ artist.name }}</h3>
+                    <p class="text-center">{{ artist.genres|join(', ') }}</p>
+                    <p class="text-center">Not the artists you are looking for? <a href="#" @click="$emit('show-other-artists')"> Try these alternatives </a></p>
+                </div>
+            </div>
+        </div>
+        <other-artists artists="{{ allArtists|json_encode}}"></other-artists>
         <div class="row">
-            <div class="col ">
-                <table class="table justify-content-center">
+            <div class="col-12">
+                <table class="table table-striped table-light table-hover justify-content-center">
                     <thead>
                         <tr>
-                            <td>Date</td>
-                            <td>Event</td>
-                            <td># Songs</td>
-                            <td>&nbsp;</td>
+                            <th>Date</th>
+                            <th>Event</th>
+                            <th># Songs</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>

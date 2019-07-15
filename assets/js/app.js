@@ -6,9 +6,10 @@
  */
 import Vue from 'vue';
 import Pager from './components/Pager.vue'
+import OtherArtists from './components/OtherArtists.vue'
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
+        require('../css/app.css');
 
 const $ = require('jquery');
 global.$ = global.jQuery = $;
@@ -19,20 +20,23 @@ require('bootstrap');
 require("bootstrap/dist/css/bootstrap.css");
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
 
 (function () {
     'use strict'
-  
+
     feather.replace()
-}())  
+}())
 
 /**
-* Create a fresh Vue Application instance
-*/
+ * Create a fresh Vue Application instance
+ */
 new Vue({
-  el: '#app',
-  components: { Pager },
+    el: '#app',
+    components: {
+        Pager,
+        OtherArtists
+    },
 });

@@ -14,14 +14,17 @@ class SetlistClientFacade extends Client
         return $this->getResponseFormat() == 'application/json' ? json_decode($result,true) : $result;
     }
     
-    public function searchSetlistsForArtist($artistName)
+    public function searchArtists($artistMbid = "", $artistName = "") 
     {
-        $result = $this->artist->search("","",$artistName);
+        $result = $this->artist->search($artistMbid,"",$artistName);
         
-        $artist = $result['total'] == 1 ? $result['artist'][0] : $result['artist'][0]; //??
-        
+        return $result;
+    } 
+   
+    public function searchSetlistsForArtist($artist)
+    {
         $setlists = $this->setlist->search($artist['mbid']);
-
+        
         if (isset($setlists['setlist'])) {
             foreach ($setlists['setlist'] as &$setlist) {
                 $songs = $this->getSetlistSongs($setlist);

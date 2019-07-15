@@ -103,12 +103,24 @@ class SetlistController extends AbstractController
     {
         if ($session->has('spotify_token'))
         {
+            if ($request->query->has('artistID')) {
+                $artistMbid = $request->query->get('artistID');
+                $artistsSetlistFM = $setlistClient->searchArtists($artistMbid);
+                
+            } else {
+                $artistSearch = $request->request->get('artist');                
+                $artistsSetlistFM = $setlistClient->searchArtists("",$artistSearch);
+            }
+            
+            $artistSetlistFM =  $artistsSetlistFM['artist'][0];
+            //little trick, we put the spotify API call between the setlistfm API calls to avoid triggering too many requests
             $spotifyClient->setAccessToken($session->get('spotify_token'));
-            $artistSearch = $request->request->get('artist');
-            $allArtists = $spotifyClient->getArtistInfo($artistSearch);
-            $artistInfo = $allArtists->artists->items[0];
-            $setlists = $setlistClient->searchSetlistsForArtist($artistSearch);
-           
+            $artistsSpotify = $spotifyClient->getArtistInfo($artistSetlistFM['name']);
+            $artistInfo = $artistsSpotify->artists->items[0];
+            sleep(1);
+            $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM);
+            $allArtists = $this->parseOtherArtists($artistsSetlistFM['artist']);
+            
             return $this->render('setlist/event_list.html.twig', [
                 'controller_name' => 'SetlistController',
                 'artist' => $artistInfo,
@@ -185,5 +197,18 @@ class SetlistController extends AbstractController
         } else {
             return $this->redirectToRoute('spotify_get_access');
         }
+    }
+    
+    protected function parseOtherArtists($artists)
+    {
+        $parsedArtists = [];
+        foreach ($artists as $artist) {
+            $parsedArtists[] = [
+                'name' => $artist['name'], 
+                'url' => $this->generateUrl('setlists_search_artist', ['artistID' => $artist['mbid']]),
+            ];
+        }
+        
+        return $parsedArtists;
     }
 }

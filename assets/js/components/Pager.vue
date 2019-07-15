@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        name: "pager",
+        name: "pager"
     }
 </script>
 
