@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-content-center" v-if="showOtherArtists" @show-other-artists="showOtherArtists=true">
+    <div class="row justify-content-center" v-if="showOtherArtists">
         <div class="col-sm-6">
             <h3 class="text-center"> Artists that match your query</h3><button @click="showOtherArtists = false">Close</button>
             <ul class="list-group-horizontal">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import { EventBus } from '../event-bus.js';
     export default {
         name: "other-artists",
         props: {
@@ -24,6 +25,9 @@
                 allArtists: JSON.parse(this.artists),
                 showOtherArtists: false,
             }
+        },
+        created() {
+            EventBus.$on('show-other-artists', this.show)
         },
         methods: {
             show: function () {

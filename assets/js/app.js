@@ -33,10 +33,16 @@ $(document).ready(function () {
 /**
  * Create a fresh Vue Application instance
  */
+import { EventBus } from './event-bus.js';
 new Vue({
     el: '#app',
     components: {
         Pager,
         OtherArtists
+    },
+    methods: {
+        show: function () {
+            EventBus.$emit('show-other-artists')
+        }
     },
 });
