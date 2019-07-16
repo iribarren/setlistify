@@ -8,10 +8,16 @@ body {
  */
 
 /* Links */
-a,
+a{
+  color: #5A4181;
+  text-decoration: underline;
+}
+
 a:focus,
 a:hover {
-  color: #fff;
+    color: #5A4181;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 /* Custom default button */

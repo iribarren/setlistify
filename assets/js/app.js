@@ -40,9 +40,4 @@ new Vue({
         Pager,
         OtherArtists
     },
-    methods: {
-        show: function () {
-            EventBus.$emit('show-other-artists')
-        }
-    },
 });

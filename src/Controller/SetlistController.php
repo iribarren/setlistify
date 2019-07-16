@@ -108,9 +108,15 @@ class SetlistController extends AbstractController
                 $artistsSetlistFM = $setlistClient->searchArtists($artistMbid);
                 
             } else {
-                $artistSearch = $request->request->get('artist');                
+                if ($request->query->has('artist')) {
+                    $artistSearch = $request->query->get('artist');                
+                } else {
+                    $artistSearch = $request->request->get('artist');                
+                }
                 $artistsSetlistFM = $setlistClient->searchArtists("",$artistSearch);
             }
+            
+            $page = $request->query->get('page') ?? 1;
             
             $artistSetlistFM =  $artistsSetlistFM['artist'][0];
             //little trick, we put the spotify API call between the setlistfm API calls to avoid triggering too many requests
@@ -118,7 +124,7 @@ class SetlistController extends AbstractController
             $artistsSpotify = $spotifyClient->getArtistInfo($artistSetlistFM['name']);
             $artistInfo = $artistsSpotify->artists->items[0];
             sleep(1);
-            $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM);
+            $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM, $page);
             $allArtists = $this->parseOtherArtists($artistsSetlistFM['artist']);
             
             return $this->render('setlist/event_list.html.twig', [

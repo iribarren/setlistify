@@ -21,9 +21,9 @@ class SetlistClientFacade extends Client
         return $result;
     } 
    
-    public function searchSetlistsForArtist($artist)
+    public function searchSetlistsForArtist($artist, $page = 1)
     {
-        $setlists = $this->setlist->search($artist['mbid']);
+        $setlists = $this->setlist->search($artist['mbid'],'', '', '', '', '', '', '', '', '', '', '', '', '',  '', $page);
         
         if (isset($setlists['setlist'])) {
             foreach ($setlists['setlist'] as &$setlist) {
