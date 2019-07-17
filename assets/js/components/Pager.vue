@@ -1,9 +1,17 @@
 <template>
     <nav>
         <ul class="pagination justify-content-center ">
-            <li class="page-item"><a class="page-link" :href="link+'&page='+(actualPage-1)">Previous</a></li>
-                <pager-item v-for="n in pages" v-bind:key="n" :id="n" :url="link">{{n}}</pager-item>
-            <li class="page-item"><a class="page-link" :href="link+'&page='+(actualPage+1)">Next</a></li>
+            <li :class="{'disabled': previousDisabled,'page-item': true}">
+                <a class="page-link"  :href="link+'&page='+(actualPage-1)">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <pager-item v-for="n in pages" v-bind:key="n" :id="n" :url="link", :actualPage="actualPage">{{n}}</pager-item>
+            <li :class="{'disabled': nextDisabled,'page-item': true}">
+                <a class="page-link" :href="link+'&page='+(actualPage+1)">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </template>
@@ -27,9 +35,15 @@
                 return Math.round(this.total / this.itemsPerPage)
             },
             pages () {
-                if (this.numPages > 10 ) {
-                    return [1,2,'..',this.page,'..',9, 10]
+                if ($this.actualPage == 1 ) {
+                    return []
                 }
+            },
+            previousDisabled () {
+                return this.actualPage == 1
+            },
+            nextDisabled () {
+                return this.actualPage == this.numPages
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <li class="page-item">
-        <a class="page-link " :href="url+'&page='+id"><slot></slot></a>
+        <a class="page-link" :href="url+'&page='+id"><slot></slot></a>
     </li>
 </template>
 
