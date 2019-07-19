@@ -6,7 +6,7 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <pager-item v-for="n in pages" v-bind:key="n" :id="n" :url="link", :actualPage="actualPage">{{n}}</pager-item>
+            <pager-item v-for="n in pages" v-bind:key="n" :id="n" :url="link" :actualPage="actualPage">{{n}}</pager-item>
             <li :class="{'disabled': nextDisabled,'page-item': true}">
                 <a class="page-link" :href="link+'&page='+(actualPage+1)">
                     <span aria-hidden="true">&raquo;</span>
@@ -35,8 +35,12 @@
                 return Math.round(this.total / this.itemsPerPage)
             },
             pages () {
-                if ($this.actualPage == 1 ) {
-                    return []
+                if (this.actualPage < 3 ) {
+                    return [1,2,3,"..",this.numPages]
+                } else if (this.actualPage > this.numPages-2 ) {
+                    return [1,"..",this.numPages-2,this.numPages-1,this.numPages]
+                } else {
+                    return [1,"..",this.actualPage-1,this.actualPage,this.actualPage+1,"..",this.numPages]
                 }
             },
             previousDisabled () {
