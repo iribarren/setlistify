@@ -7,7 +7,7 @@
 import Vue from 'vue';
 import Pager from './components/Pager.vue'
 import OtherArtists from './components/OtherArtists.vue'
-import Song from './components/Song.vue'
+import SongTable from './components/SongTable.vue'
 
 // any CSS you require will output into a single css file (app.css in this case)
         require('../css/app.css');
@@ -40,6 +40,6 @@ new Vue({
     components: {
         Pager,
         OtherArtists,
-        Song
+        SongTable
     },
 });

@@ -13,6 +13,8 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <song-table songs-info="{{ songsSpotifyInfo|json_encode}}"></song-table>
+                {# 
                 <table class="table table-striped table-light table-hover">
                     <thead>
                         <tr>
@@ -25,7 +27,7 @@
                         </tr>
                     </thead>
                     {% for songs in songsSpotifyInfo %}
-                        <song versions="{{ songs|json_encode}}" song-number="{{ loop.index }}" song-name="{{ setlistSongs[loop.index0].name }}"></song>
+                        <!--<song versions="{{ songs|json_encode}}" song-number="{{ loop.index }}" song-name="{{ setlistSongs[loop.index0].name }}"></song>-->
                         {# 
                         {% for song in songs %}
                             <tr>
@@ -40,8 +42,10 @@
                             </tr>
                         {% endfor %}
                         #}
+                        {# 
                     {% endfor %}
                 </table>
+                #}
             </div>
         </div>
         <div class="row">
