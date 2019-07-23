@@ -7,6 +7,7 @@
 import Vue from 'vue';
 import Pager from './components/Pager.vue'
 import OtherArtists from './components/OtherArtists.vue'
+import Song from './components/Song.vue'
 
 // any CSS you require will output into a single css file (app.css in this case)
         require('../css/app.css');
@@ -38,6 +39,7 @@ new Vue({
     el: '#app',
     components: {
         Pager,
-        OtherArtists
+        OtherArtists,
+        Song
     },
 });
