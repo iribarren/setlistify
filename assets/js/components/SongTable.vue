@@ -10,22 +10,23 @@
                 <td>Add</td>
             </tr>
         </thead>
-        <!--{% for songs in songsSpotifyInfo %}-->
-        <song v-for="song in songs" versions="{{ song|json_encode}}" song-number="{{ loop.index }}" song-name="{{ setlistSongs[loop.index0].name }}"></song>
-        <!--{% endfor %}-->
+        <tbody v-for="(variations,index) in songs" v-bind:key="index">
+            <song v-for="song in variations" v-bind:key="song.spotify_id"  v-bind:song="song"></song>
+        </tbody>
     </table>    
 </template>
 
 <script>
-    import Song from './Song.vue'
     export default {
         name: "song-table",
-        props: ['songsInfo'],
+        props: {
+            songsinfo: String,
+        },
         data() {
             return {
-                songs: JSON.parse(this.songsInfo),
+                songs: JSON.parse(this.songsinfo)
             }
-        },
+        }
     }
 </script>
 

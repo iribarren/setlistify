@@ -1,32 +1,30 @@
 <template>
-    <tbody :id="num" v-if="show">
-        <tr v-for="song in songVersions">
-            <td>{{num}}</td>
-            <td>{{name}}</td>
-            <td>{{ song.name }}</td>
-            <td>{{ song.album }}</td>
-            <td><img :src="song.album_cover" /></td>
-            <td><input type="radio" :id="song.id" :name="'songs['+num+']'" :value="song.id" /></td>
-        </tr>
-    </tbody>
+    <tr>
+        <td>{{song.id}}</td>
+        <td>{{song.songNameSetlist}}</td>
+        <td>{{song.songName }}</td>
+        <td>{{song.album }}</td>
+        <td><img :src="song.album_cover" /></td>
+        <td><input type="radio" :id="song.id" :name="'songs['+num+']'" :value="song.id" /></td>
+    </tr>
 </template>
 
 <script>
     export default {
         name: "song",
-        props: ['versions','songNumber','songName'],
+        props: ['songinfo'],
         data() {
             return {
-                songVersions: JSON.parse(this.versions),
-                num: this.songNumber,
-                name: this.songName
+                song = this.songinfo
             }
         },
+        /*
         computed: {
             show () {
                 return this.songVersions.length>0
             }
         }
+        */
     }
 </script>
 

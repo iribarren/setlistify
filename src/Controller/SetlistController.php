@@ -152,12 +152,14 @@ class SetlistController extends AbstractController
             $setlist = $setlistClient->setlist->getById($setlistId);
             $setlistSongs = $setlistClient->getSetlistSongs($setlist);
             $songsSpotifyInfo = $spotifyClient->searchSongsFullInfo($setlistSongs, $setlist['artist']['name']);
+            $previewSongs = $this->parsePreviewSongs($setlistSongs, $songsSpotifyInfo);
                     
             return $this->render('setlist/preview.html.twig', [
                 'controller_name' => 'SetlistController',
                 'setlist' => $setlist,
                 'setlistSongs' => $setlistSongs,
                 'songsSpotifyInfo' => $songsSpotifyInfo,
+                'songs' => $previewSongs,
                 
             ]);
         } else {
@@ -216,5 +218,26 @@ class SetlistController extends AbstractController
         }
         
         return $parsedArtists;
+    }
+
+    protected function parsePreviewSongs($setlistSongs, $songsSpotifyInfo)
+    {
+        $parsedSongs = [];
+        foreach ($songsSpotifyInfo as $i => $songs) {
+            $variations = [];
+            foreach ($songs as $j =>  $song) {
+                $variations[] = [
+                    'id' => $i + 1,
+                    'songNameSetlist' => $setlistSongs[$i]['name'],
+                    'songName' => $song['name'],
+                    'album' => $song['album'],
+                    'cover' =>  $song['album_cover'],
+                    'spotify_id' =>  $song['id'],
+                ];
+            }
+            $parsedSongs[$i] = $variations;
+        }
+        
+        return $parsedSongs;
     }
 }
