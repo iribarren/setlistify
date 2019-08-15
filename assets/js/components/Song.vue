@@ -4,8 +4,8 @@
         <td>{{song.songNameSetlist}}</td>
         <td>{{song.songName }}</td>
         <td>{{song.album }}</td>
-        <td><img :src="song.album_cover" /></td>
-        <td><input type="radio" :id="song.id" :name="'songs['+num+']'" :value="song.id" /></td>
+        <td><img :src="song.cover" /></td>
+        <td><input type="radio" :id="song.id" :name="'songs['+song.id+']'" :value="song.id" /></td>
     </tr>
 </template>
 
@@ -15,7 +15,7 @@
         props: ['songinfo'],
         data() {
             return {
-                song = this.songinfo
+                song: this.songinfo
             }
         },
         /*

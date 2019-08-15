@@ -11,14 +11,18 @@
             </tr>
         </thead>
         <tbody v-for="(variations,index) in songs" v-bind:key="index">
-            <song v-for="song in variations" v-bind:key="song.spotify_id"  v-bind:song="song"></song>
+            <song v-for="song in variations" v-bind:key="song.spotify_id"  v-bind:songinfo="song"></song>
         </tbody>
     </table>    
 </template>
 
 <script>
+    import Song from './Song.vue'
     export default {
         name: "song-table",
+        components: {
+            Song
+        },
         props: {
             songsinfo: String,
         },
