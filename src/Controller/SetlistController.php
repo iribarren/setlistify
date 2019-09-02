@@ -21,17 +21,25 @@ class SetlistController extends AbstractController
      */
     public function index()
     {
+        $page = $request->query->get('page') ?? 1;
+        $itemsPerPage = 10;//FIXME move to conf file
+
         $repository = $this->getDoctrine()->getRepository(Setlist::class);
         $setlists = $repository->findAll();
+
+
         
         return $this->render('setlist/index.html.twig', [
             'controller_name' => 'SetlistController',
             'setlists' => $setlists,
+            'itemsPerPage' => $itemsPerPage,
+            'page' => $page,//FIXME move to conf file
+            'total' => $total,//FIXME move to conf file
         ]);
     }
     
     /**
-     * @Route("/setlists/see/{id}", name="setlists_see",  requirements={"page"="\d+"})
+     * @Route("/setlists/see/{id}", name="setlists_see",  requirements={"id"="\d+"})
      * @IsGranted("ROLE_USER")
      */
     public function see(Setlist $setlist)
@@ -123,6 +131,7 @@ class SetlistController extends AbstractController
             $spotifyClient->setAccessToken($session->get('spotify_token'));
             $artistsSpotify = $spotifyClient->getArtistInfo($artistSetlistFM['name']);
             $artistInfo = $artistsSpotify->artists->items[0];
+            //we wait a secont to avoid hitting the setlist.fm limit
             sleep(1);
             $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM, $page);
             $allArtists = $this->parseOtherArtists($artistsSetlistFM['artist']);

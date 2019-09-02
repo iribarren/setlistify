@@ -9,6 +9,7 @@
     <hr />
 
     <div class="container">
+        <pager url="{{path('setlists'}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
         {% for setlist in setlists %} 
         <div class="row">
             <div class="col-sm-3">
