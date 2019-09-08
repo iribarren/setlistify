@@ -19,22 +19,20 @@ class SetlistController extends AbstractController
      * @Route("/setlists", name="setlists")
      * @IsGranted("ROLE_USER")
      */
-    public function index()
+    public function index(Request $request)
     {
         $page = $request->query->get('page') ?? 1;
         $itemsPerPage = 10;//FIXME move to conf file
 
         $repository = $this->getDoctrine()->getRepository(Setlist::class);
-        $setlists = $repository->findAll();
-
-
+        $setlists = $repository->getAllSetlists($page, $itemsPerPage);
         
         return $this->render('setlist/index.html.twig', [
             'controller_name' => 'SetlistController',
             'setlists' => $setlists,
             'itemsPerPage' => $itemsPerPage,
             'page' => $page,//FIXME move to conf file
-            'total' => $total,//FIXME move to conf file
+            'total' => $setlists->count(),//FIXME move to conf file
         ]);
     }
     

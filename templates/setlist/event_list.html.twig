@@ -9,7 +9,9 @@
     <hr />
 
     <div class="container">
-        <pager url="{{path('setlists_search_artist',{'artist': artist.name}) }}" total="{{ setlists.total }}" items-per-page="{{ setlists.itemsPerPage }}" page="{{ setlists.page }}"></pager>
+        {% if (setlists.total > setlists.itemsPerPage) %}
+            <pager url="{{path('setlists_search_artist',{'artist': artist.name}) }}" total="{{ setlists.total }}" items-per-page="{{ setlists.itemsPerPage }}" page="{{ setlists.page }}"></pager>
+        {% endif %}
         <div class="row justify-content-between align-items-center">
             <div class="col-sm-3">
                 <img src="{{ artist.images[2].url }}" />

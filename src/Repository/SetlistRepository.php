@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Setlist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Setlist|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,19 @@ class SetlistRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Setlist::class);
+    }
+    
+    public function getAllSetlists($page = 1, $limit = 10)
+    {
+        $query = $this->createQueryBuilder('s')->getQuery();
+        
+        $paginator = new Paginator($query);
+        
+        $paginator->getQuery()
+                  ->setFirstResult($limit * ($page - 1))
+                  ->setMaxResults($limit);
+        
+        return $paginator;
     }
 
     // /**

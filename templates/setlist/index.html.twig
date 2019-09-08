@@ -9,7 +9,9 @@
     <hr />
 
     <div class="container">
-        <pager url="{{path('setlists'}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
+        {% if (total > itemsPerPage) %}
+            <pager url="{{path('setlists',{'paginate': 1})}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
+        {% endif %}
         {% for setlist in setlists %} 
         <div class="row">
             <div class="col-sm-3">
