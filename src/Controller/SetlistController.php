@@ -22,7 +22,7 @@ class SetlistController extends AbstractController
     public function index(Request $request)
     {
         $page = $request->query->get('page') ?? 1;
-        $itemsPerPage = 10;//FIXME move to conf file
+        $itemsPerPage = 4;//FIXME move to conf file
 
         $repository = $this->getDoctrine()->getRepository(Setlist::class);
         $setlists = $repository->getAllSetlists($page, $itemsPerPage);

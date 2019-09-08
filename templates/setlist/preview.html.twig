@@ -7,59 +7,24 @@
 {% block body %}
 
     <hr />
-
     <form  method="POST" action="{{ path('setlists_create') }}">
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <song-table songsinfo="{{ songs|json_encode}}"></song-table>
-                {# 
-                <table class="table table-striped table-light table-hover">
-                    <thead>
-                        <tr>
-                            <td>#</td>
-                            <td>Setlist song</td>
-                            <td>Song</td>
-                            <td>Album</td>
-                            <td>Cover</td>
-                            <td>Add</td>
-                        </tr>
-                    </thead>
-                    {% for songs in songsSpotifyInfo %}
-                        <!--<song versions="{{ songs|json_encode}}" song-number="{{ loop.index }}" song-name="{{ setlistSongs[loop.index0].name }}"></song>-->
-                        {# 
-                        {% for song in songs %}
-                            <tr>
-                                <td>{{ loop.parent.loop.index }}</td>
-                                <td>{{ setlistSongs[loop.parent.loop.index0].name }}</td>
-                                <td>{{ song.name }}</td>
-                                <td>{{ song.album }}<td>
-                                <td><img src={{ song.album_cover }} /></td>
-                                <td>
-                                    <input type="radio" id="song" name="songs[{{ loop.parent.loop.index }}]" value="{{ song.id }}" {% if loop.first  %} checked {% endif %} />
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        #}
-                        {# 
-                    {% endfor %}
-                </table>
-                #}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <song-table songsinfo="{{ songs|json_encode}}"></song-table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9 ">
+                    <label for="playlist_name">Name of your playlist</label>
+                    <input type="hidden" id="setlistId" name="setlistId" value="{{setlist.id}}" />
+                    <input type="text" id="playlistName" name="playlistName" placeholder="My awesome setlist" />
+                </div>
+                <div class="col-sm-3 ">
+                    <input type="submit" value="Create Playlist" />
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-9 ">
-                <label for="playlist_name">Name of your playlist</label>
-                <input type="hidden" id="setlistId" name="setlistId" value="{{setlist.id}}" />
-                <input type="text" id="playlistName" name="playlistName" placeholder="My awesome setlist" />
-            </div>
-            <div class="col-sm-3 ">
-                <input type="submit" value="Create Playlist" />
-            </div>
-        </div>
-    </div>
-
     </form>
 
 {% endblock %}
