@@ -32,11 +32,15 @@
         },
         computed: {
             numPages() {
-                return Math.round(this.total / this.itemsPerPage)
+                return Math.ceil(this.total / this.itemsPerPage)
             },
             pages () {
                 if (this.actualPage < 3 ) {
-                    return [1,2,3,"..",this.numPages]
+                    if (this.numPages < 3) {
+                        return Array.from(Array(this.numPages),(x,index) => index +1)
+                    } else {
+                        return [1,2,3,"..",this.numPages]
+                    }
                 } else if (this.actualPage > this.numPages-2 ) {
                     return [1,"..",this.numPages-2,this.numPages-1,this.numPages]
                 } else {

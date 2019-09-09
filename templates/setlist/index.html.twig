@@ -9,13 +9,10 @@
     <hr />
 
     <div class="container">
-        {% if (total > itemsPerPage) %}
-            <pager url="{{path('setlists',{'paginate': 1})}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
-            {% endif %}
-            {% set elements = 0 %}
-            {% for setlist in setlists %}
-                {% set elements = elements +1 %}
-                {% if (loop.index0 is even)  %}
+        {% set elements = 0 %}
+        {% for setlist in setlists %}
+            {% set elements = elements +1 %}
+            {% if (loop.index0 is even)  %}
                 <div class="row">
                 {% endif %}
                 <div class="card m-auto m-1" style="width: 40%;">
@@ -43,5 +40,8 @@
             </div>
         </div>
     {% endif %}
+    {% if (total > itemsPerPage) %}
+        <pager url="{{path('setlists',{'paginate': 1})}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
+        {% endif %}
 </div>
 {% endblock %}
