@@ -19,11 +19,9 @@ class SpotifyController extends AbstractController
         if (isset($_GET['code'])) {
             $spotifySession->requestAccessToken($_GET['code']);
             $session->set('spotify_token', $spotifySession->getAccessToken());
-            $redirectTo = $session->get('pre_spotify_referer_route', 'setlists');
 
-            return new RedirectResponse($redirectTo);
+            return new RedirectResponse('setlists');
         } else {
-            $session->set('pre_spotify_referer_route', $request->headers->get('referer'));
             $options = [
                 'scope' => [
                     'user-read-email',

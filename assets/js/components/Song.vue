@@ -6,7 +6,7 @@
         <td>{{song.album }}</td>
         <td><img :src="song.cover" /></td>
         <td><input type="radio" @click="selectSong" v-bind:id="song.id" v-bind:name="'songs['+song.id+']'" v-bind:value="song.spotify_id" v-bind:checked="selected" /></td>
-        <td><button class="btn btn-dark" @click.prevent="showMore" v-if="selected">{{button}}</button></a></td>
+        <td><button class="btn btn-dark" @click.prevent="showMore" v-if="selected" title="See alternatives">{{button}}</button></a></td>
 
     </tr>
 </template>
@@ -69,5 +69,7 @@
 </script>
 
 <style scoped>
-
+    td {
+        vertical-align: middle;
+    }
 </style>

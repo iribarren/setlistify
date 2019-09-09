@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed-bottom m-lg-auto">
+    <nav class="mt-2">
         <ul class="pagination justify-content-center ">
             <li :class="{'disabled': previousDisabled,'page-item': true}">
                 <a class="page-link"  :href="link+'&page='+(actualPage-1)">

@@ -7,8 +7,6 @@
 {% block body %}
 
     <hr />
-
-    
         <div class="col">
             {% set elements = 0 %}
             {% for setlist in setlists %}
@@ -31,7 +29,7 @@
                 {% endif %}
             {% endfor %}
             {% if (elements is odd)  %}
-            <div class="card m-auto m-1" style="width: 48%;">
+            <div class="card m-auto m-1" style="width: 48%; min-height: 370px">
                     <div class="card-body">
                         <h5 class="card-title">Add new playlist</h5>
                         <p class="card-text">
