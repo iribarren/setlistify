@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="fixed-bottom m-lg-auto">
         <ul class="pagination justify-content-center ">
             <li :class="{'disabled': previousDisabled,'page-item': true}">
                 <a class="page-link"  :href="link+'&page='+(actualPage-1)">
@@ -74,15 +74,16 @@
 
     }
 
-    .pagination > .active > a
+    .pagination > li > .active 
     {
         color: darkgrey;
         background-color: #5A4181 !Important;
         border-color: #5A4181 !Important;
     }
 
-    .pagination > .active > a:hover
+    .pagination > li > .active:hover
     {
-        background-color: #5A4181 !Important;   
+        background-color: #5A4181 !Important;
+        color: #FFF !Important;
     }   
 </style>

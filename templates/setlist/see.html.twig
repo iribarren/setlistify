@@ -2,7 +2,7 @@
 
 {% block title %}Setlistify{% endblock %}
 
-{% block header %}{{setlist.name}}{% endblock %}
+{% block header %}{{setlist.name | upper}}{% endblock %}
 
 {% block body %}
 
@@ -11,7 +11,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h3 class="text-center"><a href="{{ path('setlists_see',{'id' : setlist.id}) }}">{{ setlist.name }}</a></h3>
+                <h3 class="text-center">{{ setlist.name |capitalize }}</h3>
+                <p class="text-center i">{{ setlist.date|date('Y-m-d') }}</p>
+                <p class="text-center">At the {{ setlist.venue }} in {{ setlist.city }}</p>             
             </div>
             <div class="col-sm-9">
                 <iframe src="https://open.spotify.com/embed/playlist/{{setlist.spotifyId}}&theme=white" width="100%"height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
