@@ -20,7 +20,7 @@ class SpotifyController extends AbstractController
             $spotifySession->requestAccessToken($_GET['code']);
             $session->set('spotify_token', $spotifySession->getAccessToken());
 
-            return new RedirectResponse('setlists');
+            $this->redirectToRoute('setlists');
         } else {
             $options = [
                 'scope' => [

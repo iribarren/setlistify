@@ -7,14 +7,14 @@
 {% block body %}
 
     <hr />
-        <div class="col">
+        <div class="col" style="min-height: 770px">
             {% set elements = 0 %}
             {% for setlist in setlists %}
                 {% set elements = elements +1 %}
                 {% if (loop.index0 is even)  %}
                     <div class="row">
                     {% endif %}
-                <div class="card m-auto m-1" style="width: 48%;">
+                <div class="card card-back m-auto m-1" style="width: 48%;">
                         <div class="card-body">
                             <h5 class="card-title">{{ setlist.name |capitalize }}</h5>
                             <p class="card-text">
@@ -27,6 +27,12 @@
                     </div>
                     <br />
                 {% endif %}
+            {% else %}
+                <div class="alert alert-dark" role="alert">
+                    <p class="text-center">
+                        You still don't have setlists. <a href="{{ path('setlists_new') }}">Create your first setlist</a>
+                    </p>
+                </div>
             {% endfor %}
             {% if (elements is odd)  %}
             <div class="card m-auto m-1" style="width: 48%; min-height: 370px">
@@ -39,9 +45,8 @@
                 </div>
             </div>
         {% endif %}
+        </div>
         {% if (total > itemsPerPage) %}
             <pager url="{{path('setlists',{'paginate': 1})}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
-            {% endif %}
-        </div>
-    
+        {% endif %}
 {% endblock %}

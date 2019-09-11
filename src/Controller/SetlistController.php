@@ -73,7 +73,12 @@ class SetlistController extends AbstractController
             $artist = $request->request->get('artist');
             $playlistName = $request->request->get('name');
 
-            list($setlistfm, $songs) = $setlistClient->searchLastSetlistForArtist($artist);
+            try {
+                list($setlistfm, $songs) = $setlistClient->searchLastSetlistForArtist($artist);
+            } catch (\Exception $e) {
+                $this->addFlash('notice', 'We could not find the artists you were looking for');
+                return $this->redirectToRoute('setlists_new');
+            }
         
             $spotifyClient->setAccessToken($session->get('spotify_token'));
                         
@@ -109,6 +114,8 @@ class SetlistController extends AbstractController
     {
         if ($session->has('spotify_token'))
         {
+            $page = $request->query->get('page') ?? 1;
+            
             if ($request->query->has('artistID')) {
                 $artistMbid = $request->query->get('artistID');
                 $artistsSetlistFM = $setlistClient->searchArtists($artistMbid);
@@ -122,7 +129,11 @@ class SetlistController extends AbstractController
                 $artistsSetlistFM = $setlistClient->searchArtists("",$artistSearch);
             }
             
-            $page = $request->query->get('page') ?? 1;
+            
+            if (!isset($artistsSetlistFM['artist'])) {
+                $this->addFlash('notice', 'We could not find the artists you were looking for');
+                return $this->redirectToRoute('setlists_new');
+            }
             
             $artistSetlistFM =  $artistsSetlistFM['artist'][0];
             //little trick, we put the spotify API call between the setlistfm API calls to avoid triggering too many requests

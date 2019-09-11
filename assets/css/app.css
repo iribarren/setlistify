@@ -140,5 +140,14 @@ body {
 .header_text {
   font-family: 'Dancing Script', cursive;
   text-align: center;
-  font-size: 40px;
+  font-size: 48px;
+}
+
+.subtitle {
+    color: darkgrey;
+    size: 1.4rem;
+}
+
+.card-back {
+    background-color: darkgray;
 }
