@@ -30,7 +30,7 @@ services:
         arguments:
             $clientId: '%env(resolve:SPOTIFY_ID)%'
             $clientSecret: '%env(resolve:SPOTIFY_SECRET)%'
-            $redirectUri: http://127.0.0.1:8000/spotify/get_access
+            $redirectUri: '%env(resolve:SPOTIFY_URI)%'
             $request: null
     App\Service\SetlistClientFacade:
         arguments:
