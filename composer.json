@@ -9,6 +9,7 @@
         "iribarren/setlist-client": "^2.0",
         "jwilsson/spotify-web-api-php": "^2.8",
         "sensio/framework-extra-bundle": "^5.1",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
         "symfony/expression-language": "4.2.*",
