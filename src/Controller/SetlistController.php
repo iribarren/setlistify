@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Setlist;
-use App\Entity\User;
 use App\Service\SetlistClientFacade;
 use App\Service\SpotifyApiFacade;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-class SetlistController extends AbstractController
+class SetlistController extends AbstractController implements UseSpotifyInterface
 {
     /**
      * @Route("/setlists", name="setlists")
@@ -31,8 +32,8 @@ class SetlistController extends AbstractController
             'controller_name' => 'SetlistController',
             'setlists' => $setlists,
             'itemsPerPage' => $itemsPerPage,
-            'page' => $page,//FIXME move to conf file
-            'total' => $setlists->count(),//FIXME move to conf file
+            'page' => $page,
+            'total' => $setlists->count(),
         ]);
     }
     
@@ -68,42 +69,36 @@ class SetlistController extends AbstractController
      */
     public function createLucky(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager)
     {
-        if ($session->has('spotify_token'))
-        {
-            $artist = $request->request->get('artist');
-            $playlistName = $request->request->get('name');
+        $artist = $request->request->get('artist');
+        $playlistName = $request->request->get('name');
 
-            try {
-                list($setlistfm, $songs) = $setlistClient->searchLastSetlistForArtist($artist);
-            } catch (\Exception $e) {
-                $this->addFlash('notice', 'We could not find the artists you were looking for');
-                return $this->redirectToRoute('setlists_new');
-            }
-        
-            $spotifyClient->setAccessToken($session->get('spotify_token'));
-                        
-            $playlist = $spotifyClient->addPlaylistLucky($playlistName, $songs, $artist);
-            
-            $setlist = new Setlist();
-            $setlist->setName($playlistName);
-            $setlist->setCity($setlistfm['venue']['city']['name']);
-            $setlist->setDate(new \DateTime($setlistfm['eventDate']));
-            $setlist->setSetlistfmId($setlistfm['id']);
-            $setlist->setSpotifyId($playlist->id);
-            
-            $user = $this->getUser();
-            
-            $setlist->setUser($user);
-            $setlist->setVenue($setlistfm['venue']['name']);
-            
-            $entityManager->persist($setlist);
-            $entityManager->flush();
-            
-            return $this->redirectToRoute('setlists');
-            
-        } else {
-            return $this->redirectToRoute('spotify_get_access');
+        try {
+            list($setlistfm, $songs) = $setlistClient->searchLastSetlistForArtist($artist);
+        } catch (Exception $e) {
+            $this->addFlash('notice', 'We could not find the artists you were looking for');
+            return $this->redirectToRoute('setlists_new');
         }
+
+        $spotifyClient->setAccessToken($session->get('spotify_token'));
+
+        $playlist = $spotifyClient->addPlaylistLucky($playlistName, $songs, $artist);
+
+        $setlist = new Setlist();
+        $setlist->setName($playlistName);
+        $setlist->setCity($setlistfm['venue']['city']['name']);
+        $setlist->setDate(new DateTime($setlistfm['eventDate']));
+        $setlist->setSetlistfmId($setlistfm['id']);
+        $setlist->setSpotifyId($playlist->id);
+
+        $user = $this->getUser();
+
+        $setlist->setUser($user);
+        $setlist->setVenue($setlistfm['venue']['name']);
+
+        $entityManager->persist($setlist);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('setlists');
     }
     
     /**
@@ -112,48 +107,43 @@ class SetlistController extends AbstractController
      */
     public function search(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
     {
-        if ($session->has('spotify_token'))
-        {
-            $page = $request->query->get('page') ?? 1;
-            
-            if ($request->query->has('artistID')) {
-                $artistMbid = $request->query->get('artistID');
-                $artistsSetlistFM = $setlistClient->searchArtists($artistMbid);
-                
-            } else {
-                if ($request->query->has('artist')) {
-                    $artistSearch = $request->query->get('artist');                
-                } else {
-                    $artistSearch = $request->request->get('artist');                
-                }
-                $artistsSetlistFM = $setlistClient->searchArtists("",$artistSearch);
-            }
-            
-            
-            if (!isset($artistsSetlistFM['artist'])) {
-                $this->addFlash('notice', 'We could not find the artists you were looking for');
-                return $this->redirectToRoute('setlists_new');
-            }
-            
-            $artistSetlistFM =  $artistsSetlistFM['artist'][0];
-            //little trick, we put the spotify API call between the setlistfm API calls to avoid triggering too many requests
-            $spotifyClient->setAccessToken($session->get('spotify_token'));
-            $artistsSpotify = $spotifyClient->getArtistInfo($artistSetlistFM['name']);
-            $artistInfo = $artistsSpotify->artists->items[0];
-            //we wait a secont to avoid hitting the setlist.fm limit
-            sleep(1);
-            $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM, $page);
-            $allArtists = $this->parseOtherArtists($artistsSetlistFM['artist']);
-            
-            return $this->render('setlist/event_list.html.twig', [
-                'controller_name' => 'SetlistController',
-                'artist' => $artistInfo,
-                'allArtists' => $allArtists,
-                'setlists' => $setlists,
-            ]);
+        $page = $request->query->get('page') ?? 1;
+
+        if ($request->query->has('artistID')) {
+            $artistMbid = $request->query->get('artistID');
+            $artistsSetlistFM = $setlistClient->searchArtists($artistMbid);
+
         } else {
-            return $this->redirectToRoute('spotify_get_access');
+            if ($request->query->has('artist')) {
+                $artistSearch = $request->query->get('artist');                
+            } else {
+                $artistSearch = $request->request->get('artist');                
+            }
+            $artistsSetlistFM = $setlistClient->searchArtists("",$artistSearch);
         }
+
+
+        if (!isset($artistsSetlistFM['artist'])) {
+            $this->addFlash('notice', 'We could not find the artists you were looking for');
+            return $this->redirectToRoute('setlists_new');
+        }
+
+        $artistSetlistFM =  $artistsSetlistFM['artist'][0];
+        //little trick, we put the spotify API call between the setlistfm API calls to avoid triggering too many requests
+        $spotifyClient->setAccessToken($session->get('spotify_token'));
+        $artistsSpotify = $spotifyClient->getArtistInfo($artistSetlistFM['name']);
+        $artistInfo = $artistsSpotify->artists->items[0];
+        //we wait a secont to avoid hitting the setlist.fm limit
+        sleep(1);
+        $setlists = $setlistClient->searchSetlistsForArtist($artistSetlistFM, $page);
+        $allArtists = $this->parseOtherArtists($artistsSetlistFM['artist']);
+
+        return $this->render('setlist/event_list.html.twig', [
+            'controller_name' => 'SetlistController',
+            'artist' => $artistInfo,
+            'allArtists' => $allArtists,
+            'setlists' => $setlists,
+        ]);
     }
 
     /**
@@ -162,27 +152,22 @@ class SetlistController extends AbstractController
      */
     public function preview(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
     {
-        if ($session->has('spotify_token'))
-        {
-            $spotifyClient->setAccessToken($session->get('spotify_token'));
-            $setlistId = $request->query->get('setlistId');            
-            $artist = $request->query->get('artist');            
-            $setlist = $setlistClient->setlist->getById($setlistId);
-            $setlistSongs = $setlistClient->getSetlistSongs($setlist);
-            $songsSpotifyInfo = $spotifyClient->searchSongsFullInfo($setlistSongs, $setlist['artist']['name']);
-            $previewSongs = $this->parsePreviewSongs($setlistSongs, $songsSpotifyInfo);
-                    
-            return $this->render('setlist/preview.html.twig', [
-                'controller_name' => 'SetlistController',
-                'setlist' => $setlist,
-                'setlistSongs' => $setlistSongs,
-                'songsSpotifyInfo' => $songsSpotifyInfo,
-                'songs' => $previewSongs,
-                
-            ]);
-        } else {
-            return $this->redirectToRoute('spotify_get_access');
-        }
+        $spotifyClient->setAccessToken($session->get('spotify_token'));
+        $setlistId = $request->query->get('setlistId');            
+        $artist = $request->query->get('artist');            
+        $setlist = $setlistClient->setlist->getById($setlistId);
+        $setlistSongs = $setlistClient->getSetlistSongs($setlist);
+        $songsSpotifyInfo = $spotifyClient->searchSongsFullInfo($setlistSongs, $setlist['artist']['name']);
+        $previewSongs = $this->parsePreviewSongs($setlistSongs, $songsSpotifyInfo);
+
+        return $this->render('setlist/preview.html.twig', [
+            'controller_name' => 'SetlistController',
+            'setlist' => $setlist,
+            'setlistSongs' => $setlistSongs,
+            'songsSpotifyInfo' => $songsSpotifyInfo,
+            'songs' => $previewSongs,
+
+        ]);
     }
 
     /**
@@ -191,38 +176,32 @@ class SetlistController extends AbstractController
      */
     public function createPlaylist(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager)
     {
-        if ($session->has('spotify_token'))
-        {
-            $spotifyClient->setAccessToken($session->get('spotify_token'));
+        $spotifyClient->setAccessToken($session->get('spotify_token'));
 
-            
-            $songs = $request->request->get('songs');
-            $setlistId = $request->request->get('setlistId');
-            $playlistName = $request->request->get('playlistName');   
-            
-            $playlist = $spotifyClient->addPlaylist($playlistName, $songs);
-            
-            $setlistfm = $setlistClient->setlist->getById($setlistId);
-            $setlist = new Setlist();
-            $setlist->setName($playlistName);
-            $setlist->setCity($setlistfm['venue']['city']['name']);
-            $setlist->setDate(new \DateTime($setlistfm['eventDate']));
-            $setlist->setSetlistfmId($setlistfm['id']);
-            $setlist->setSpotifyId($playlist->id);
-            
-            $user = $this->getUser();
-            
-            $setlist->setUser($user);
-            $setlist->setVenue($setlistfm['venue']['name']);
-            
-            $entityManager->persist($setlist);
-            $entityManager->flush();
-                        
-            return $this->redirectToRoute('setlists');
-            
-        } else {
-            return $this->redirectToRoute('spotify_get_access');
-        }
+
+        $songs = $request->request->get('songs');
+        $setlistId = $request->request->get('setlistId');
+        $playlistName = $request->request->get('playlistName');   
+
+        $playlist = $spotifyClient->addPlaylist($playlistName, $songs);
+
+        $setlistfm = $setlistClient->setlist->getById($setlistId);
+        $setlist = new Setlist();
+        $setlist->setName($playlistName);
+        $setlist->setCity($setlistfm['venue']['city']['name']);
+        $setlist->setDate(new DateTime($setlistfm['eventDate']));
+        $setlist->setSetlistfmId($setlistfm['id']);
+        $setlist->setSpotifyId($playlist->id);
+
+        $user = $this->getUser();
+
+        $setlist->setUser($user);
+        $setlist->setVenue($setlistfm['venue']['name']);
+
+        $entityManager->persist($setlist);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('setlists');
     }
     
     protected function parseOtherArtists($artists)
