@@ -37,9 +37,21 @@ class DefaultController extends AbstractController
     }
     
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact", methods={"GET"}, name="contact")
      */
     public function contact()
+    {
+        $template = $this->getUser() == null ? 'default/contact_cover.html.twig' : 'default/contact.html.twig' ;
+        
+        return $this->render($template, [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    
+    /**
+     * @Route("/contact", methods={"POST"}, name="contact_post")
+     */
+    public function contactPost()
     {
         $template = $this->getUser() == null ? 'default/contact_cover.html.twig' : 'default/contact.html.twig' ;
         
