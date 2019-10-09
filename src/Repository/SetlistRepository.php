@@ -22,13 +22,14 @@ class SetlistRepository extends ServiceEntityRepository
     
     public function getAllSetlistsUser($user, $page = 1, $limit = 10)
     {
-        $query = $this->createQueryBuilder('s')->getQuery();
+        $query = $this->createQueryBuilder('s')
+                      ->where('s.user = :u')
+                      ->setParameter('u', $user)
+                      ->getQuery();
         
         $paginator = new Paginator($query);
         
         $paginator->getQuery()
-                  ->where('s.user_id = :user_id')
-                  ->setParameter('user_id', $user->getId())
                   ->setFirstResult($limit * ($page - 1))
                   ->setMaxResults($limit);
         

@@ -13,17 +13,19 @@
                 {% set elements = elements +1 %}
                 {% if (loop.index0 is even)  %}
                     <div class="row">
-                    {% endif %}
-                <div class="card card-back m-auto m-1" style="width: 48%;">
+                {% endif %}
+                <div class="col-md-6">
+                    <div class="card card-back m-auto m-1">
                         <div class="card-body">
                             <h5 class="card-title">{{ setlist.name |capitalize }}</h5>
                             <p class="card-text">
-                                <iframe src="https://open.spotify.com/embed/playlist/{{setlist.spotifyId}}&theme=white" width="660px" height="250px" frameborder="1" allowtransparency="true" allow="encrypted-media"></iframe>
+                                <iframe src="https://open.spotify.com/embed/playlist/{{setlist.spotifyId}}&theme=white" width="100%" height="250px" frameborder="1" allowtransparency="true" allow="encrypted-media"></iframe>
                             </p>
                             <a href="{{ path('setlists_see',{'id' : setlist.id}) }}">See playlist</a>
                         </div>
-                    </div>  
-                    {% if (loop.index0 is odd)  %}
+                    </div>
+                </div>
+                {% if (loop.index0 is odd)  %}
                     </div>
                     <br />
                 {% endif %}
@@ -35,16 +37,17 @@
                 </div>
             {% endfor %}
             {% if (elements is odd)  %}
-            <div class="card m-auto m-1" style="width: 48%; min-height: 370px">
-                    <div class="card-body">
-                        <h5 class="card-title">Add new playlist</h5>
-                        <p class="card-text">
-                        </p>
-                        <a href="{{ path('setlists_new') }}">Add playlist</a>
+                <div class="col-md-6">
+                    <div class="card m-auto m-1" style="min-height: 370px">
+                        <div class="card-body">
+                            <h5 class="card-title">Add new playlist</h5>
+                            <p class="card-text">
+                            </p>
+                            <a href="{{ path('setlists_new') }}">Add playlist</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
         </div>
         {% if (total > itemsPerPage) %}
             <pager url="{{path('setlists',{'paginate': 1})}}" total="{{ total }}" items-per-page="{{ itemsPerPage }}" page="{{ page }}"></pager>
