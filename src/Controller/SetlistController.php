@@ -24,9 +24,9 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
     {
         $page = $request->query->get('page') ?? 1;
         $itemsPerPage = 4;//FIXME move to conf file
-
+        $user = $this->getUser();
         $repository = $this->getDoctrine()->getRepository(Setlist::class);
-        $setlists = $repository->getAllSetlists($page, $itemsPerPage);
+        $setlists = $repository->getAllSetlistsUser($user, $page, $itemsPerPage);
         
         return $this->render('setlist/index.html.twig', [
             'controller_name' => 'SetlistController',
