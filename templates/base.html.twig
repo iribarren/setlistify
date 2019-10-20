@@ -55,16 +55,24 @@
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
-                                        <span data-feather="music"></span>
-                                        My playlists
+                                        <span data-feather="music"></span>My playlists
                                     </a>
                                 </li>
                             </ul>
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists_new') %} active {% endif %}" href="{{path('setlists_new')}}">
-                                        <span data-feather="plus-circle"></span>
-                                        Add playlist
+                                        <span data-feather="plus-circle"></span>Add playlist
+                                    </a>
+                                </li>
+                            </ul>
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                <span>Contact</span>
+                            </h6>
+                            <ul class="nav flex-column mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link {% if (app.request.attributes.get('_route') == 'contact') %} active {% endif %}" href="{{path('contact')}}">
+                                        <span data-feather="mail"></span>Contact
                                     </a>
                                 </li>
                             </ul>

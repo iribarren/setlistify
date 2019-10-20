@@ -1,0 +1,49 @@
+{% extends 'base_cover.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('cover') }}
+{% endblock %}
+
+{% block title %}Setlistify{% endblock %}
+
+{% block body %}
+  
+<form method="post">
+    <h1 class="h3 mb-3 font-weight-normal">Contact</h1>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-4 required" for="email">Your Email</label>
+        <div class="col-sm-8">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-4 required" for="subject">Subject</label>
+        <div class="col-sm-8">
+            <input type="subject" name="subject" id="subject" class="form-control" placeholder="Subject" required />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-4 required" for="message">Your Message</label>
+        <div class="col-sm-8">
+            <textarea type="message" name="message" id="message" class="form-control" placeholder="Write here your message" rows="8" required></textarea>
+        </div>
+    </div>
+    
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <button class="btn btn-lg btn-light" type="submit">Send</button>
+        </div>
+    </div>
+    
+</form>
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('cover') }}
+{% endblock %}
