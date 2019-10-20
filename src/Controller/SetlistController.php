@@ -67,7 +67,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
      * @Route("/setlists/add-lucky", name="setlists_add_lucky")
      * @IsGranted("ROLE_USER")
      */
-    public function createLucky(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager)
+    public function createLucky(Request $request, SessionInterface $session, SpotifyApiFacade $spotifyClient, SetlistClientFacade $setlistClient, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
         $artist = $request->request->get('artist');
         $playlistName = $request->request->get('name');
@@ -75,7 +75,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
         try {
             list($setlistfm, $songs) = $setlistClient->searchLastSetlistForArtist($artist);
         } catch (Exception $e) {
-            $this->addFlash('notice', 'We could not find the artists you were looking for');
+            $this->addFlash('notice', $translator->trans('We could not find the artist you were looking for'));
             return $this->redirectToRoute('setlists_new');
         }
 
@@ -105,7 +105,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
      * @Route("/setlists/search_artist", name="setlists_search_artist")
      * @IsGranted("ROLE_USER")
      */
-    public function search(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
+    public function search(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient, TranslatorInterface $translator)
     {
         $page = $request->query->get('page') ?? 1;
 
@@ -124,7 +124,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
 
 
         if (!isset($artistsSetlistFM['artist'])) {
-            $this->addFlash('notice', 'We could not find the artists you were looking for');
+            $this->addFlash('notice', $translator->trans('We could not find the artist you were looking for'));
             return $this->redirectToRoute('setlists_new');
         }
 

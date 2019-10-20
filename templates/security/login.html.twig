@@ -11,17 +11,21 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">
+        {% trans %}
+            Please sign in
+        {% endtrans %}
+    </h1>
     <div class="form-group row">
-        <label class="col-form-label col-sm-4 required" for="inputEmail">Email</label>
+        <label class="col-form-label col-sm-4 required" for="inputEmail">{% trans %}Email{% endtrans %}</label>
         <div class="col-sm-8">
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-form-label col-sm-4 required" for="inputPassword">Password</label>
+        <label class="col-form-label col-sm-4 required" for="inputPassword">{% trans %}Password{% endtrans %}</label>
         <div class="col-sm-8">
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required />
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="{% trans %}Password{% endtrans %}" required />
         </div>
     </div>
     
@@ -39,7 +43,7 @@
     #}
     <div class="form-group row">
         <div class="col-sm-12">
-            <button class="btn btn-lg btn-light" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-light" type="submit">{% trans %}Sign in{% endtrans %}</button>
         </div>
     </div>
     

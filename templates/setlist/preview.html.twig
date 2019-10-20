@@ -2,7 +2,11 @@
 
 {% block title %}Setlistify{% endblock %}
 
-{% block header %}Choose your songs{% endblock %}
+{% block header %}
+    {% trans %}
+        Choose your songs
+    {% endtrans %}
+{% endblock %}
 
 {% block body %}
 
@@ -16,12 +20,12 @@
             </div>
             <div class="row">
                 <div class="col-sm-9 ">
-                    <label for="playlist_name">Name of your playlist</label>
+                    <label for="playlist_name">{% trans %}Name of your playlist{% endtrans %}</label>
                     <input type="hidden" id="setlistId" name="setlistId" value="{{setlist.id}}" />
-                    <input type="text" id="playlistName" name="playlistName" placeholder="My awesome setlist" />
+                    <input type="text" id="playlistName" name="playlistName" placeholder="{% trans %}My awesome setlist" {% endtrans %}/>
                 </div>
                 <div class="col-sm-3 text-right">
-                    <input type="submit" value="Create Playlist" />
+                    <input type="submit" value="{% trans %}Create Playlist{% endtrans %}" />
                 </div>
             </div>
         </div>
