@@ -19,6 +19,7 @@
                 <div class="inner">
                     <h1 class="masthead-brand header_text">Setlistify</h1>
                     <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'contact') %} active {% endif %}" href="{{ path('contact') }}">Contact</a>
                         <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_register') %} active {% endif %}" href="{{ path('app_register') }}">Register</a>
                         <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_login') %} active {% endif %}" href="{{ path('app_login') }}">Sign in</a>
                     </nav>
