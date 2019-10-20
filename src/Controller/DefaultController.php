@@ -53,19 +53,24 @@ class DefaultController extends AbstractController {
      */
     public function contactPost(Request $request, Swift_Mailer $mailer) {
         
+        $user = $this->getUser();
+        if ($user == null) {
+            $email = $request->request->get('email');
+            $template = 'default/contact_success_cover.html.twig';
+        } else {
+            $email = $user->getEmail();
+            $template = 'default/contact_success.html.twig';
+        }
         $subject = $request->request->get('subject');
-        $message = $request->request->get('message');
-        $email = $request->request->get('email');
+        $body = $request->request->get('message');
         
         $message = (new Swift_Message($subject))
                 ->setFrom($email)
                 ->setTo('contact@setlistify.org')
-                ->setBody($this->renderView('emails/contact.html.twig',['message' => $message]),
+                ->setBody($this->renderView('emails/contact.html.twig',['message' => $body]),
                          'text/html');
 
         $mailer->send($message);
-
-        $template = $this->getUser() == null ? 'default/contact_success_cover.html.twig' : 'default/contact_success.html.twig';
 
         return $this->render($template, [
                     'controller_name' => 'DefaultController',
