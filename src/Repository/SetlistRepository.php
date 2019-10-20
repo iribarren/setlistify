@@ -20,9 +20,12 @@ class SetlistRepository extends ServiceEntityRepository
         parent::__construct($registry, Setlist::class);
     }
     
-    public function getAllSetlists($page = 1, $limit = 10)
+    public function getAllSetlistsUser($user, $page = 1, $limit = 10)
     {
-        $query = $this->createQueryBuilder('s')->getQuery();
+        $query = $this->createQueryBuilder('s')
+                      ->where('s.user = :u')
+                      ->setParameter('u', $user)
+                      ->getQuery();
         
         $paginator = new Paginator($query);
         
