@@ -19,10 +19,32 @@
                 <div class="inner">
                     <h1 class="masthead-brand header_text">Setlistify</h1>
                     <nav class="nav nav-masthead justify-content-center">
-                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'contact') %} active {% endif %}" href="{{ path('contact') }}">Contact</a>
-                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_register') %} active {% endif %}" href="{{ path('app_register') }}">Register</a>
-                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_login') %} active {% endif %}" href="{{ path('app_login') }}">Sign in</a>
-                    </nav>
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'contact') %} active {% endif %}" href="{{ path('contact') }}">
+                            {% trans %}
+                                Contact
+                            {% endtrans %}
+                        </a>
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_register') %} active {% endif %}" href="{{ path('app_register') }}">
+                            {% trans %}
+                                Register
+                            {% endtrans %}
+                        </a>
+                        <a class="nav-link {% if (app.request.attributes.get('_route') == 'app_login') %} active {% endif %}" href="{{ path('app_login') }}">
+                            {% trans %}
+                                Sign in
+                            {% endtrans %}
+                        </a>
+                            <a class="nav-link dropdown-toggle" href="" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> {% trans %} Lenguaje {% endtrans %}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown09">
+                            <a class="dropdown-item" href="#fr">
+                                <span class="flag-icon flag-icon-fr"> </span>  en
+                            </a>
+                            <a class="dropdown-item" href="#fr">
+                                <span class="flag-icon flag-icon-fr"> </span>  es
+                            </a>
+                        </div>
+                        
+                    </nav>                    
                 </div>
             </header>
 
@@ -32,9 +54,9 @@
 
             <footer class="mastfoot mt-auto">
                 <div class="inner">
-                    <p>Developed by <a href="mailto://iribarren.aritz@gmail.com">Aritz Iribarren Galarza</a>.</p>
-                    <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-                    <p>Photo by <a href="https://snapwiresnaps.tumblr.com/">Snapwire</a>.</p>
+                    <p>{% trans %}Developed by{% endtrans %} <a href="mailto://iribarren.aritz@gmail.com">Aritz Iribarren Galarza</a>.</p>
+                    <p>{% trans %}Cover template for {% endtrans %}<a href="https://getbootstrap.com/">Bootstrap</a>, {% trans %} by {% endtrans %} <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    <p>{% trans %}Photo by {% endtrans %}<a href="https://snapwiresnaps.tumblr.com/">Snapwire</a>.</p>
                 </div>
             </footer>
         </div>

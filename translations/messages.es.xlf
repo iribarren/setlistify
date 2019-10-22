@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id=".0MFb_e" resname="We could not find the artist you were looking for">
+        <source>We could not find the artist you were looking for</source>
+        <target>No hemos podido encontrar la banda que buscabas</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Registro</target>
+      </trans-unit>
+      <trans-unit id="dDUw20Q" resname="Please sign in">
+        <source>Please sign in</source>
+        <target>Inicia sesión</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Contraseña</target>
+      </trans-unit>
+      <trans-unit id="v9QCsvb" resname="Sign in">
+        <source>Sign in</source>
+        <target>Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="K1w9JnI" resname="Contact">
+        <source>Contact</source>
+        <target>Contacto</target>
+      </trans-unit>
+      <trans-unit id="aJcSg4Q" resname="Subject">
+        <source>Subject</source>
+        <target>Asunto</target>
+      </trans-unit>
+      <trans-unit id="tb5dTqr" resname="Your Message">
+        <source>Your Message</source>
+        <target>Tu mensaje</target>
+      </trans-unit>
+      <trans-unit id="7DS0_0b" resname="Write here your message">
+        <source>Write here your message</source>
+        <target>Escribe aquí tu mensaje</target>
+      </trans-unit>
+      <trans-unit id="9vRoj.I" resname="Send">
+        <source>Send</source>
+        <target>Enviar</target>
+      </trans-unit>
+      <trans-unit id="FuF_Xik" resname="Thank you for your feedback">
+        <source>Thank you for your feedback</source>
+        <target>Gracias por tu comentario</target>
+      </trans-unit>
+      <trans-unit id="Z7aWRoY" resname="Dashboard">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="IWej4Er" resname="Your Email">
+        <source>Your Email</source>
+        <target>Tú correo electronico</target>
+      </trans-unit>
+      <trans-unit id="MPbDjFl" resname="Discover what your favorite artists have played live">
+        <source>Discover what your favorite artists have played live</source>
+        <target>Descubre lo que tus grupos favoritos han tocado en directo</target>
+      </trans-unit>
+      <trans-unit id="njL0_Qh" resname="Create a Spotify playlist for that setlist">
+        <source>Create a Spotify playlist for that setlist</source>
+        <target>Crea un playlist de Spotify con las canciones que tocaron</target>
+      </trans-unit>
+      <trans-unit id="rD8bl43" resname="Get ready for the show">
+        <source>Get ready for the show</source>
+        <target>Preparate para el show</target>
+      </trans-unit>
+      <trans-unit id="f8QlPUE" resname="Latest events for %artist%}}">
+        <source>Latest events for %artist%}}</source>
+        <target>Últimos conciertos de %artist%}}</target>
+      </trans-unit>
+      <trans-unit id="V_5Jmdf" resname="Not the artists you are looking for?">
+        <source>Not the artists you are looking for?</source>
+        <target>¿No es el grupo que buscabas?</target>
+      </trans-unit>
+      <trans-unit id="RLK7KD7" resname="Try these alternatives">
+        <source>Try these alternatives</source>
+        <target>Prueba con estas alternativas</target>
+      </trans-unit>
+      <trans-unit id="mcQKtAW" resname="Date">
+        <source>Date</source>
+        <target>Fecha</target>
+      </trans-unit>
+      <trans-unit id="Th9Jqci" resname="Event">
+        <source>Event</source>
+        <target>Concierto</target>
+      </trans-unit>
+      <trans-unit id="20b8.tV" resname="# Songs">
+        <source># Songs</source>
+        <target>Nº Canciones</target>
+      </trans-unit>
+      <trans-unit id="sda5G2f" resname="at">
+        <source>at</source>
+        <target>en</target>
+      </trans-unit>
+      <trans-unit id="t8ZGVsP" resname="New setlist">
+        <source>New setlist</source>
+        <target>Nuevo setlist</target>
+      </trans-unit>
+      <trans-unit id="FpC60pk" resname="Automatic setlist creation">
+        <source>Automatic setlist creation</source>
+        <target>Creación de setlist autómatica</target>
+      </trans-unit>
+      <trans-unit id="1wYE6EM" resname="Recommended">
+        <source>Recommended</source>
+        <target>Recomendado</target>
+      </trans-unit>
+      <trans-unit id="cb3uzv1" resname="Search for an artist">
+        <source>Search for an artist</source>
+        <target>Busca un grupo</target>
+      </trans-unit>
+      <trans-unit id="IDO8oWl" resname="Give a name for your playlist">
+        <source>Give a name for your playlist</source>
+        <target>Nombra tu playlist</target>
+      </trans-unit>
+      <trans-unit id="F2xu38Y" resname="We will create the playlist with the last live setlist of the band">
+        <source>We will create the playlist with the last live setlist of the band</source>
+        <target>Crearemos el playlist con el último setlist que encontremos del grupo</target>
+      </trans-unit>
+      <trans-unit id="C2IM9W8" resname="Step by step setlist creation">
+        <source>Step by step setlist creation</source>
+        <target>Creación de setlist paso a paso</target>
+      </trans-unit>
+      <trans-unit id="nwiNvr1" resname="Advanced">
+        <source>Advanced</source>
+        <target>Avanzado</target>
+      </trans-unit>
+      <trans-unit id="ga6gJE3" resname="Pick the date of the event">
+        <source>Pick the date of the event</source>
+        <target>Elige la fecha del evento</target>
+      </trans-unit>
+      <trans-unit id="G3mPzWz" resname="See the songs in the setlist and choose your favorite version">
+        <source>See the songs in the setlist and choose your favorite version</source>
+        <target>Ve las canciones del concierto y elige tu versión favorita para el setlist</target>
+      </trans-unit>
+      <trans-unit id="vWP7f24" resname="Create the playlist">
+        <source>Create the playlist</source>
+        <target>Crea el playlist</target>
+      </trans-unit>
+      <trans-unit id="HTmBuh4" resname="Artist">
+        <source>Artist</source>
+        <target>Grupo</target>
+      </trans-unit>
+      <trans-unit id="FZco71p" resname="Playlist name">
+        <source>Playlist name</source>
+        <target>Nombre del playlist</target>
+      </trans-unit>
+      <trans-unit id="UDzY22D" resname="My awesome playlist">
+        <source>My awesome playlist</source>
+        <target>Mi playlist épico</target>
+      </trans-unit>
+      <trans-unit id="fwl.c15" resname="Create playlist">
+        <source>Create playlist</source>
+        <target>Crear playlist</target>
+      </trans-unit>
+      <trans-unit id="3ZyfZmj" resname="See events">
+        <source>See events</source>
+        <target>Ver conciertos</target>
+      </trans-unit>
+      <trans-unit id="ycnfhNp" resname="At the %venue% in %city%">
+        <source>At the %venue% in %city%</source>
+        <target>En %venue% de %city%</target>
+      </trans-unit>
+      <trans-unit id="VWeZtQn" resname="Choose your songs">
+        <source>Choose your songs</source>
+        <target>Escoge tus canciones</target>
+      </trans-unit>
+      <trans-unit id="KRPfcWD" resname="Name of your playlist">
+        <source>Name of your playlist</source>
+        <target>Nombre de tu playlist</target>
+      </trans-unit>
+      <trans-unit id="GjEmQPZ" resname="My awesome setlist">
+        <source>My awesome setlist</source>
+        <target>Mi playlist épico</target>
+      </trans-unit>
+      <trans-unit id="egDK_Xw" resname="Create Playlist">
+        <source>Create Playlist</source>
+        <target>Crear playlist</target>
+      </trans-unit>
+      <trans-unit id="Pov0oCc" resname="Your setlists">
+        <source>Your setlists</source>
+        <target>Tus setlists</target>
+      </trans-unit>
+      <trans-unit id="WzsytYn" resname="See playlist">
+        <source>See playlist</source>
+        <target>Ver setlist</target>
+      </trans-unit>
+      <trans-unit id="eVUr5KZ" resname="You still don't have setlists.">
+        <source>You still don't have setlists.</source>
+        <target>Todavia no has creado ningún setlist.</target>
+      </trans-unit>
+      <trans-unit id="Sf_ewLH" resname="Create your first setlist">
+        <source>Create your first setlist</source>
+        <target>Crea tu primer setlist</target>
+      </trans-unit>
+      <trans-unit id="nVfzSeg" resname="Add new playlist">
+        <source>Add new playlist</source>
+        <target>Añade un nuevo playlist</target>
+      </trans-unit>
+      <trans-unit id="Kw8uQJe" resname="Add playlist">
+        <source>Add playlist</source>
+        <target>Añadir playlist</target>
+      </trans-unit>
+      <trans-unit id="sJetElI" resname="Developed by">
+        <source>Developed by</source>
+        <target>Desarrollado por </target>
+      </trans-unit>
+      <trans-unit id="eUKgjlJ" resname="Cover template for">
+        <source>Cover template for</source>
+        <target>Plantilla Cover para</target>
+      </trans-unit>
+      <trans-unit id="p_LSbo0" resname="by">
+        <source>by</source>
+        <target> de </target>
+      </trans-unit>
+      <trans-unit id="UB8VewG" resname="Photo by">
+        <source>Photo by</source>
+        <target>Fotografía de </target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="htiPHRy" resname="Lastname">
+        <source>Lastname</source>
+        <target>Apellidos</target>
+      </trans-unit>
+      <trans-unit id="SPDT05f" resname="Sign out">
+        <source>Sign out</source>
+        <target>Cerrar sesión</target>
+      </trans-unit>
+      <trans-unit id="3NCk0sZ" resname="Playlists">
+        <source>Playlists</source>
+        <target>Playlists</target>
+      </trans-unit>
+      <trans-unit id="gfZ42tt" resname="My playlists">
+        <source>My playlists</source>
+        <target>Mis playlists</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

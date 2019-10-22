@@ -15,7 +15,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register/{_locale}", name="app_register", requirements={"_locale":"en|es"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
     {

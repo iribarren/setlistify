@@ -24,7 +24,7 @@
                 </h2>
                 <ul class="navbar-nav px-3">
                     <li class="nav-item text-nowrap">
-                        <a class="nav-link" href="{{path('app_logout')}}"><span data-feather="log-out"></span>Sign out</a>
+                        <a class="nav-link" href="{{path('app_logout')}}"><span data-feather="log-out"></span>{% trans %}Sign out {% endtrans %}</a>
                     </li>
                 </ul>
             </nav>
@@ -45,7 +45,11 @@
                             </ul>
                             -->
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                                <span>Playlists</span>
+                                <span>
+                                    {% trans %}
+                                    Playlists
+                                    {% endtrans %}
+                                </span>
                                 <!--
                                 <a class="d-flex align-items-center text-muted" href="{{ path('setlists_new') }}">
                                     <span data-feather="plus-circle"></span>
@@ -55,24 +59,37 @@
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists') %} active {% endif %}" href="{{path('setlists')}}">
-                                        <span data-feather="music"></span>My playlists
+                                        <span data-feather="music"></span>
+                                        {% trans %}
+                                        My playlists
+                                        {% endtrans %}
                                     </a>
                                 </li>
                             </ul>
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link {% if (app.request.attributes.get('_route') == 'setlists_new') %} active {% endif %}" href="{{path('setlists_new')}}">
-                                        <span data-feather="plus-circle"></span>Add playlist
+                                        <span data-feather="plus-circle"></span>
+                                        {% trans %}
+                                        Add playlist
+                                        {% endtrans %}
                                     </a>
                                 </li>
                             </ul>
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                                <span>Contact</span>
+                                <span>
+                                    {% trans %}
+                                    Contact
+                                    {% endtrans %}
+                                </span>
                             </h6>
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link {% if (app.request.attributes.get('_route') == 'contact') %} active {% endif %}" href="{{path('contact')}}">
-                                        <span data-feather="mail"></span>Contact
+                                        <span data-feather="mail"></span>
+                                        {% trans %}
+                                        Contact
+                                        {% endtrans %}
                                     </a>
                                 </li>
                             </ul>

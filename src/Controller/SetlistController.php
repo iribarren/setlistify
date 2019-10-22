@@ -8,16 +8,17 @@ use App\Service\SpotifyApiFacade;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SetlistController extends AbstractController implements UseSpotifyInterface
 {
     /**
-     * @Route("/setlists", name="setlists")
+     * @Route("/setlists/{_locale}", name="setlists", locale="en", requirements={"_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function index(Request $request)
@@ -38,7 +39,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
     }
     
     /**
-     * @Route("/setlists/see/{id}", name="setlists_see",  requirements={"id"="\d+"})
+     * @Route("/setlists/{_locale}/see/{id}", name="setlists_see",  requirements={"id":"\d+","_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function see(Setlist $setlist)
@@ -53,7 +54,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
     }
     
     /**
-     * @Route("/setlists/new", name="setlists_new")
+     * @Route("/setlists/{_locale}/new", name="setlists_new", requirements={"_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function new()
@@ -102,7 +103,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
     }
     
     /**
-     * @Route("/setlists/search_artist", name="setlists_search_artist")
+     * @Route("/setlists/{_locale}/search_artist", name="setlists_search_artist", requirements={"_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function search(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient, TranslatorInterface $translator)
@@ -147,7 +148,7 @@ class SetlistController extends AbstractController implements UseSpotifyInterfac
     }
 
     /**
-     * @Route("/setlists/preview", name="setlist_preview")
+     * @Route("/setlists/{_locale}/preview", name="setlist_preview", requirements={"_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function preview(Request $request, SessionInterface $session, SetlistClientFacade $setlistClient, SpotifyApiFacade $spotifyClient)
