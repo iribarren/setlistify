@@ -76,4 +76,18 @@ class DefaultController extends AbstractController {
                     'controller_name' => 'DefaultController',
         ]);
     }
+    
+    /**
+     * @Route("/change_locale", name="change_locale")
+     */
+    public function changeLocale(Request $request) {
+        
+        $locale = $request->query->get('locale');
+        $redirect = $request->query->get('redirect');
+        $params = $request->query->get('params');
+        $params['_locale'] = $locale;
+        $request->setLocale($locale);
+        
+        return $this->redirectToRoute ($redirect, $params);
+    }
 }

@@ -34,16 +34,18 @@
                                 Sign in
                             {% endtrans %}
                         </a>
-                            <a class="nav-link dropdown-toggle" href="" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> {% trans %} Lenguaje {% endtrans %}</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item" href="#fr">
-                                <span class="flag-icon flag-icon-fr"> </span>  en
+                        <a class="nav-link dropdown-toggle" href="" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="flag-icon flag-icon-us"> </span> 
+                            {{ app.request.locale }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown09" style="min-width:0px">
+                            <a class="dropdown-item" href="{{ path('change_locale', {locale: 'es', redirect: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}">
+                                <img src="{{ asset('build/img/es.png') }}" style="padding-right:12px" >es
                             </a>
-                            <a class="dropdown-item" href="#fr">
-                                <span class="flag-icon flag-icon-fr"> </span>  es
+                            <a class="dropdown-item" href="{{ path('change_locale', {locale: 'en', redirect: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}">
+                                <img src="{{ asset('build/img/en.png') }}" style="padding-right:12px" >en
                             </a>
                         </div>
-                        
                     </nav>                    
                 </div>
             </header>

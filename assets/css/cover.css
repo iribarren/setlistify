@@ -115,3 +115,8 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
