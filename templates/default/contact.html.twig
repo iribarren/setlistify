@@ -5,20 +5,28 @@
 {% block body %}
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Contact</h1>
+        <h1 class="h2">
+            {% trans %}
+                Contact
+            {% endtrans %}
+        </h1>
     </div>
 
     <form method="post">
         <div class="form-group row">
-            <label class="col-form-label col-sm-2 required text-right" for="subject">Subject</label>
+            <label class="col-form-label col-sm-2 required text-right" for="subject">
+                {% trans %}
+                    Subject
+                {% endtrans %}
+            </label>
             <div class="col-sm-10">
-                <input type="subject" name="subject" id="subject" class="form-control" placeholder="Subject" required />
+                <input type="subject" name="subject" id="subject" class="form-control" placeholder="{% trans %}Subject{% endtrans %}" required />
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-form-label col-sm-2 required text-right" for="message">Your Message</label>
+            <label class="col-form-label col-sm-2 required text-right" for="message">{% trans %}Your Message{% endtrans %}</label>
             <div class="col-sm-10">
-                <textarea type="message" name="message" id="message" class="form-control" placeholder="Write here your message" rows="8" required></textarea>
+                <textarea type="message" name="message" id="message" class="form-control" placeholder="{% trans %}Write here your message{% endtrans %}" rows="8" required></textarea>
             </div>
         </div>
 
@@ -26,7 +34,7 @@
 
         <div class="form-group row">
             <div class="col-sm-12">
-                <button class="btn btn-lg btn-light float-right" type="submit">Send</button>
+                <button class="btn btn-lg btn-light float-right" type="submit">{% trans %}Send{% endtrans %}</button>
             </div>
         </div>
 

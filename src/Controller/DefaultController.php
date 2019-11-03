@@ -19,7 +19,7 @@ class DefaultController extends AbstractController {
     }
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{_locale}", name="homepage", locale="en", requirements={"_locale":"en|es"})
      */
     public function index() {
         return $this->render('default/index.html.twig', [
@@ -28,7 +28,7 @@ class DefaultController extends AbstractController {
     }
 
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/dashboard/{_locale}", name="dashboard", locale="en", requirements={"_locale":"en|es"})
      * @IsGranted("ROLE_USER")
      */
     public function dashboard() {
@@ -38,7 +38,7 @@ class DefaultController extends AbstractController {
     }
 
     /**
-     * @Route("/contact", methods={"GET"}, name="contact")
+     * @Route("/contact/{_locale}", methods={"GET"}, name="contact", locale="en", requirements={"_locale":"en|es"})
      */
     public function contact() {
         $template = $this->getUser() == null ? 'default/contact_cover.html.twig' : 'default/contact.html.twig';
@@ -76,5 +76,18 @@ class DefaultController extends AbstractController {
                     'controller_name' => 'DefaultController',
         ]);
     }
-
+    
+    /**
+     * @Route("/change_locale", name="change_locale")
+     */
+    public function changeLocale(Request $request) {
+        
+        $locale = $request->query->get('locale');
+        $redirect = $request->query->get('redirect');
+        $params = $request->query->get('params');
+        $params['_locale'] = $locale;
+        $request->setLocale($locale);
+        
+        return $this->redirectToRoute ($redirect, $params);
+    }
 }

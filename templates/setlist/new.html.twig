@@ -2,7 +2,11 @@
 
 {% block title %}Setlistify{% endblock %}
 
-{% block header %}New setlist{% endblock %}
+{% block header %}
+    {% trans %}
+        New setlist
+    {% endtrans %}
+{% endblock %}
 
 {% block body %}
 
@@ -14,22 +18,22 @@
         {% endfor %}
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="text-center">Automatic setlist creation</h3>
-                <p class="text-center">Recommended</p>
+                <h3 class="text-center">{% trans %}Automatic setlist creation{% endtrans %}</h3>
+                <p class="text-center">{% trans %}Recommended{% endtrans %}</p>
                 <ul>
-                    <li>Search for an artist</li>
-                    <li>Give a name for your playlist</li>
-                    <li>We will create the playlist with the last live setlist of the band</li>
+                    <li>{% trans %}Search for an artist{% endtrans %}</li>
+                    <li>{% trans %}Give a name for your playlist{% endtrans %}</li>
+                    <li>{% trans %}We will create the playlist with the last live setlist of the band{% endtrans %}</li>
                 </ul>
             </div>
             <div class="col-sm-6">
-                <h3 class="text-center">Step by step setlist creation</h3>
-                <p class="text-center">Advanced</p>
+                <h3 class="text-center">{% trans %}Step by step setlist creation{% endtrans %}</h3>
+                <p class="text-center">{% trans %}Advanced{% endtrans %}</p>
                 <ul>
-                    <li>Search for an artist</li>
-                    <li>Pick the date of the event</li>
-                    <li>See the songs in the setlist and choose your favorite version</li>
-                    <li>Create the playlist</li>
+                    <li>{% trans %}Search for an artist{% endtrans %}</li>
+                    <li>{% trans %}Pick the date of the event{% endtrans %}</li>
+                    <li>{% trans %}See the songs in the setlist and choose your favorite version{% endtrans %}</li>
+                    <li>{% trans %}Create the playlist{% endtrans %}</li>
                 </ul>
             </div>
         </div>
@@ -37,15 +41,15 @@
             <div class="col-sm-6">
                 <form  method="POST" id="form_lucky" action="{{ path('setlists_add_lucky') }}">
                     <div class="form-group row">
-                        <label for="artist" class="col-sm-3 col-form-label text-right">Artist: </label>
+                        <label for="artist" class="col-sm-3 col-form-label text-right">{% trans %}Artist{% endtrans %}: </label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="artist" name='artist' required="true" placeholder="Iron maiden">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label text-right">Playlist name: </label>
+                        <label for="name" class="col-sm-3 col-form-label text-right">{% trans %}Playlist name{% endtrans %}: </label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="name" name='name' required="true" placeholder="My awesome playlist">
+                            <input type="text" class="form-control" id="name" name='name' required="true" placeholder="{% trans %}My awesome playlist{% endtrans %}">
                         </div>
                     </div>
                 </form>
@@ -53,7 +57,7 @@
             <div class="col-sm-6 align-items-center">
                 <form  method="POST" id="form_search" action="{{ path('setlists_search_artist') }}">
                     <div class="form-group row">
-                        <label for="artist" class="col-sm-3 col-form-label text-right">Artist: </label>
+                        <label for="artist" class="col-sm-3 col-form-label text-right">{% trans %}Artist{% endtrans %}: </label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="artist" name='artist' placeholder="Iron maiden">
                         </div>
@@ -65,14 +69,14 @@
             <div class="col-sm-6">
                 <div class="form-group row text-center">
                     <div class="col text-center">
-                        <button type="button" class="btn btn-dark" id="create_lucky" type="submit">Create playlist</button>
+                        <button type="button" class="btn btn-dark" id="create_lucky" type="submit">{% trans %}Create playlist{% endtrans %}</button>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group row text-center">
                     <div class="col text-center">
-                        <button type="button" class="btn btn-dark" id="create_search" type="submit">See events</button>
+                        <button type="button" class="btn btn-dark" id="create_search" type="submit">{% trans %}See events{% endtrans %}</button>
                     </div>
                 </div>
             </div>

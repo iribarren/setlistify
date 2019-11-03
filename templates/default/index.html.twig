@@ -9,11 +9,11 @@
 
 {% block body %}
   
-    <p class="lead">Discover what your favorite artists have played live</p>
-    <p class="lead">Create a Spotify playlist for that setlist</p>
-    <p class="lead">Get ready for the show</p>
+    <p class="lead">{% trans %}Discover what your favorite artists have played live{% endtrans %}</p>
+    <p class="lead">{% trans %}Create a Spotify playlist for that setlist{% endtrans %}</p>
+    <p class="lead">{% trans %}Get ready for the show{% endtrans %}</p>
     <p class="lead">
-      <a href="{{path('app_login')}}" class="btn btn-lg btn-secondary">Sign in</a>
+        <a href="{{path('app_login')}}" class="btn btn-lg btn-secondary">{% trans %}Sign in{% endtrans %}</a>
     </p>
 
 {% endblock %}

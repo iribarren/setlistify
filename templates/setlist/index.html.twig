@@ -2,7 +2,11 @@
 
 {% block title %}Setlistify{% endblock %}
 
-{% block header %}Your setlists{% endblock %}
+{% block header %}
+    {% trans %}
+        Your setlists
+    {% endtrans %}
+{% endblock %}
 
 {% block body %}
 
@@ -21,7 +25,7 @@
                             <p class="card-text">
                                 <iframe src="https://open.spotify.com/embed/playlist/{{setlist.spotifyId}}&theme=white" width="100%" height="250px" frameborder="1" allowtransparency="true" allow="encrypted-media"></iframe>
                             </p>
-                            <a href="{{ path('setlists_see',{'id' : setlist.id}) }}">See playlist</a>
+                            <a href="{{ path('setlists_see',{'id' : setlist.id}) }}">{% trans %}See playlist{% endtrans %}</a>
                         </div>
                     </div>
                 </div>
@@ -32,7 +36,8 @@
             {% else %}
                 <div class="alert alert-dark" role="alert">
                     <p class="text-center">
-                        You still don't have setlists. <a href="{{ path('setlists_new') }}">Create your first setlist</a>
+                        {% trans %}You still don't have setlists.{% endtrans %}
+                        <a href="{{ path('setlists_new') }}">{% trans %}Create your first setlist{% endtrans %}</a>
                     </p>
                 </div>
             {% endfor %}
@@ -40,10 +45,10 @@
                 <div class="col-md-6">
                     <div class="card m-auto m-1" style="min-height: 370px">
                         <div class="card-body">
-                            <h5 class="card-title">Add new playlist</h5>
+                            <h5 class="card-title">{% trans %}Add new playlist{% endtrans %}</h5>
                             <p class="card-text">
                             </p>
-                            <a href="{{ path('setlists_new') }}">Add playlist</a>
+                            <a href="{{ path('setlists_new') }}">{% trans %}Add playlist{% endtrans %}</a>
                         </div>
                     </div>
                 </div>
